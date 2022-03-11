@@ -1,6 +1,13 @@
 <?php
 
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\DishesController;
+use App\Http\Controllers\DishesProductsController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\CulinaryProcessings;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {// если я перейду по этому маршруту я получу все данные авторизованного юзера раньше вместо санктум тут было слово апи
     return $request->user();
 });
 Route::get('/items', [ItemController::class, 'index']);
@@ -27,6 +34,38 @@ Route::prefix('/item')->group(function(){
 
 
 Route::get('/chats', [ChatController::class, 'index']);
-Route::prefix('/chats')->group(function(){
+Route::prefix('/chat')->group(function(){
     Route::post('/store', [ChatController::class, 'store']);
 });
+
+Route::post('/register', [RegisterController::class, 'register']);
+//Route::post('/login', 'LoginController@login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+
+$nameUrl = '/dishes';
+$nameMethod = 'index';
+$class = App\Http\Controllers\DishesController::class;
+Route::get($nameUrl, [$class, $nameMethod]);
+Route::prefix('/dishes')->group(function(){
+    Route::post('/store', [DishesController::class, 'store']);
+    Route::delete('/{id}', [DishesController::class, 'destroy']);
+    Route::get('/dishes-categories', [DishesController::class, 'dishesCategories']);
+    Route::get('/recipes-collections', [DishesController::class, 'recipesCollections']);
+    Route::get('/culinary-processings', [DishesController::class, 'culinaryProcessings']);
+    Route::post('/copy-dish/{id}', [DishesController::class, 'copyDish']);
+    Route::post('/one-dish/{id}', [DishesController::class, 'oneDish']);
+});
+
+Route::prefix('/dishes-products')->group(function(){
+    Route::post('/store', [DishesProductsController::class, 'store']);
+    Route::delete('/{id}', [DishesProductsController::class, 'destroy']);
+    Route::post('/products-dish/{id}', [DishesProductsController::class, 'productsDish']);
+});
+Route::get('/products', [ProductsController::class, 'index']);
+Route::post('/products/store', [ProductsController::class, 'store']);
+Route::get('/register/roles', [RegisterController::class, 'roles']);
+Route::get('/register/headerlinks', [RegisterController::class, 'headerlinks']);
+Route::get('/products/products-category', [ProductsController::class, 'productsCategory']);
+Route::delete('/products/{id}', [ProductsController::class, 'destroy']);

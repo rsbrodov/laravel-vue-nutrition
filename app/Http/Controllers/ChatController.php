@@ -15,7 +15,8 @@ class ChatController extends Controller
      */
     public function index()
     {
-        //
+        $messages = Chat::orderBy('created_at', 'ASC')->get();
+        return $messages;
     }
 
     /**
@@ -36,10 +37,11 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
+        //return $request;
         $new_chat = New Chat();
         $new_chat->room_id = 1;
-        $new_chat->user_id = Auth::user()->id;
-        $new_chat->message = $request->chat['message'];
+        $new_chat->user_id = 1;//Auth::user()->id;
+        $new_chat->message = $request->message;
         $new_chat->save();
         return $new_chat;
     }
