@@ -1,10 +1,13 @@
 <template>
     <div>
-       <p>My name: {{user.data.name}}</p>
-        <p>My name: {{user.data.email}}</p>
+        <p>Имя пользователя: {{user.data.name}}</p>
+        <p>Email: {{user.data.email}}</p>
+        <p>Роль:</p>
         <p v-for="(role, index) in myRoles" :key="index">{{index}}</p>
-        {{myRoles}}
-        <button @click.prevent="logout()">Logout</button>
+            <div class="col-3">
+                <button @click.prevent="logout()" class="form-control btn btn-danger rounded submit px-3">Выйти</button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -46,6 +49,6 @@ export default {
 <style scoped>
 .has-error{
     border-color: red;
-    
+
 }
 </style>

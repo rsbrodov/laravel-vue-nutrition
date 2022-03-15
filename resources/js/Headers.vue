@@ -1,7 +1,7 @@
 <template>
 <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">BLOGGER</a>
+  <a class="navbar-brand" href="#">MENU MACKER</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -25,7 +25,7 @@ import {mapGetters, mapActions} from 'vuex'
     export default {
         data() {
             return {
-               
+
             }
         },
         computed: mapGetters(['myHeader_links']),
@@ -34,7 +34,7 @@ import {mapGetters, mapActions} from 'vuex'
         },
         async created(){
             this.getMyHeaderLinks()
-      
+
         },
     }
 </script>
