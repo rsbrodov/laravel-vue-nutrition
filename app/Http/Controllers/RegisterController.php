@@ -42,14 +42,16 @@ class RegisterController extends Controller
     {
         $mas= array();
         if ( Auth::check()) {
-            $mas['/todolist'] = 'Список дел';
-            $mas['/chat'] = 'Чат';
+            //$mas['/todolist'] = 'Список дел';
+            //$mas['/chat'] = 'Чат';
             $mas['/dishes'] = 'Блюда';
-            $mas['/cabinet'] = 'Личный кабинет';
             $mas['/products'] = 'Продукты';
+            $mas['/menus'] = 'Мои меню';
+            $mas['/cabinet'] = 'Личный кабинет';
+
         }else{
             $mas['/login'] = 'Авторизация';
-            $mas['/registr'] = 'Регистрация';
+            //$mas['/registr'] = 'Регистрация';
         }
 
         return $mas;
