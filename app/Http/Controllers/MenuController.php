@@ -14,7 +14,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        $menus = Menu::all();
+        return $menus;
     }
 
     /**
@@ -24,7 +25,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,7 +36,12 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_menu = New Menu();
+        $new_menu->name = $request->form['name'];
+        $new_menu->parent_id = 0;
+        $new_menu->cycle = $request->form['cycle'];
+        $new_menu->save();
+        return Menu::where('id', $new_menu->id)->get();
     }
 
     /**
@@ -78,8 +84,13 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu)
+    public function destroy($id)
     {
-        //
+        $existing_item = Menu::find($id);
+        if($existing_item){
+            $existing_item->delete();
+            return 'Item saccessufuly delete';
+        }
+        return 'Item not found';
     }
 }

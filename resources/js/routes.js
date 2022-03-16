@@ -8,6 +8,7 @@ import Dishes from './vue/dishes/Dishes'
 import Dropdown from './vue/test/Dropdown'
 import Test from './vue/auth/Test'
 import Products from './vue/products/Products'
+import Menus from './vue/menus/Menus'
 export default{
 
     mode:'history',
@@ -60,6 +61,11 @@ export default{
         {
             path:"/products",
             component: Products,
+
+        },
+        {
+            path:"/menus",
+            component: Menus,
 
         },
     ]

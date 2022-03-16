@@ -3,6 +3,7 @@
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\DishesController;
 use App\Http\Controllers\DishesProductsController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CulinaryProcessings;
 use App\Http\Controllers\ChatController;
@@ -69,3 +70,7 @@ Route::get('/register/roles', [RegisterController::class, 'roles']);
 Route::get('/register/headerlinks', [RegisterController::class, 'headerlinks']);
 Route::get('/products/products-category', [ProductsController::class, 'productsCategory']);
 Route::delete('/products/{id}', [ProductsController::class, 'destroy']);
+
+Route::get('/menus', [MenuController::class, 'index']);
+Route::post('/menus/store', [MenuController::class, 'store']);
+Route::delete('/menus/{id}', [MenuController::class, 'destroy']);
