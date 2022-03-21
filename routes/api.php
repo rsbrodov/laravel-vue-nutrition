@@ -23,9 +23,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {// если я перейду по этому маршруту я получу все данные авторизованного юзера раньше вместо санктум тут было слово апи
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware('auth:sanctum')->get('/athenticated', function () {
+    return true;
+});
+
 Route::get('/items', [ItemController::class, 'index']);
 Route::prefix('/item')->group(function(){
     Route::post('/store', [ItemController::class, 'store']);
@@ -39,10 +43,9 @@ Route::prefix('/chat')->group(function(){
     Route::post('/store', [ChatController::class, 'store']);
 });
 
-Route::post('/register', [RegisterController::class, 'register']);
-//Route::post('/login', 'LoginController@login');
+/*Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::post('/logout', [LoginController::class, 'logout']);*/
 
 
 $nameUrl = '/dishes';
@@ -64,7 +67,7 @@ Route::prefix('/dishes-products')->group(function(){
     Route::delete('/{id}', [DishesProductsController::class, 'destroy']);
     Route::post('/products-dish/{id}', [DishesProductsController::class, 'productsDish']);
 });
-Route::get('/products', [ProductsController::class, 'index']);
+Route::get('/products', [ProductsController::class, 'index'])->middleware('auth:sanctum');
 Route::post('/products/store', [ProductsController::class, 'store']);
 Route::get('/register/roles', [RegisterController::class, 'roles']);
 Route::get('/register/headerlinks', [RegisterController::class, 'headerlinks']);
@@ -74,3 +77,4 @@ Route::delete('/products/{id}', [ProductsController::class, 'destroy']);
 Route::get('/menus', [MenuController::class, 'index']);
 Route::post('/menus/store', [MenuController::class, 'store']);
 Route::delete('/menus/{id}', [MenuController::class, 'destroy']);
+Route::get('/menus/menu-characters/{id}', [MenuController::class, 'menuCharacters']);

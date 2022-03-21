@@ -30,7 +30,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 const app = new Vue({
     el:'#app',
     router: new VueRouter(routes),
-    store, 
-    
+    store,
+
     //components: { App }
 });

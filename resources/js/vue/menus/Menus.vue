@@ -3,7 +3,7 @@
 
     <h1 class="text-center">Список меню</h1>
       <b-button v-b-modal.modal-1 variant="success" class="mb-4">Создать новое меню</b-button>
-      <b-modal id="modal-1" class="mb-4" title="Добавление нового продукта" >
+      <b-modal id="modal-1" class="mb-4" size="lg" title="Добавление нового продукта" >
           <addMenu/>
       </b-modal>
     <table class="table table-bordered">
@@ -12,13 +12,17 @@
         <th scope="col">ID</th>
         <th scope="col">Название</th>
         <th scope="col" class="text-center">Цикл</th>
+        <th scope="col" class="text-center">Приемы пищи</th>
+        <th scope="col" class="text-center">Дни</th>
       </tr>
     </thead>
     <tbody>
-          <tr v-for="(myMenu, index) in allMenus" :key="index">
+          <tr v-for="(myMenu, index) in allMenus" :key="index" >
               <td>{{myMenu.id}}</td>
               <td>{{myMenu.name}}</td>
               <td>{{myMenu.cycle}}</td>
+              <td>{{ myMenu.nutritions}}</td>
+<!--              <td><span v-for="nutrition in myMenu.days">{{ nutrition.days_id }}, </span></td>-->
               <td class="text-center"><b-button variant="danger" @click="removeMenus(myMenu.id)">
                   <font-awesome-icon icon="trash"/>
               </b-button></td>
@@ -45,8 +49,7 @@ export default{
         ...mapActions(['getMenus', 'deleteMenu']),
         removeMenus(id){
             this.deleteMenu(id)
-        }
-
+        },
     },
 
     async created(){

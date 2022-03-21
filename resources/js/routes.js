@@ -66,7 +66,13 @@ export default{
         {
             path:"/menus",
             component: Menus,
-
+            /*beforeEnter(to, from, next) {
+                if (isAuthenticated()) {
+                    next();
+                } else {
+                    next('/login');
+                }
+            }*/
         },
     ]
 }

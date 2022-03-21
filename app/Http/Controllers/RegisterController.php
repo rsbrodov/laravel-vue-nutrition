@@ -42,6 +42,7 @@ class RegisterController extends Controller
     {
         $mas= array();
         if ( Auth::check()) {
+        //if (auth('sanctum')->check()) {
             //$mas['/todolist'] = 'Список дел';
             //$mas['/chat'] = 'Чат';
             $mas['/dishes'] = 'Блюда';
