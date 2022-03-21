@@ -82,14 +82,17 @@ export default{
                 this.$v.$touch()
                 return
             }
-            axios.post('api/login', this.form)
-            .then(prevent =>{
-                this.getMyHeaderLinks();
-                this.$router.push('/cabinet')
-                //this.$pusher.push('/cabinet') error
-            })
-            .catch(error =>{
+            axios.get('/sanctum/csrf-cookie').then(response => {
+                axios.post('api/login', this.form)
+                .then(response =>{
+                    localStorage.setItem('token', response.data);
+                    this.getMyHeaderLinks();
+                    this.$router.push('/cabinet')
+                    //this.$pusher.push('/cabinet') error
+                })
+                .catch(error =>{
 
+                })
             })
         }
     }
