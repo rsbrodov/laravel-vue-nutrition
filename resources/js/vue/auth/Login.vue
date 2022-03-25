@@ -40,7 +40,7 @@
                                       v-else-if="$v.form.password.$dirty && !$v.form.password.minLength"
                                     >Пароль должен быть {{$v.form.password.$params.minLength.min}} символов. Сейчас он {{form.password.length}}</small>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-4">
                                     <button type="submit" class="form-control btn btn-primary rounded submit px-3">Войти</button>
                                 </div>
                             </form>
@@ -74,24 +74,20 @@ export default{
         }
 
     },
-    computed: mapGetters(['myHeader_links']),
     methods:{
-        ...mapActions(['getMyHeaderLinks']),
         login(){
             if (this.$v.$invalid) {
-                this.$v.$touch()
+                this.$v.$touch();
                 return
             }
             axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post('api/login', this.form)
+                axios.post('/login', this.form)
                 .then(response =>{
-                    localStorage.setItem('token', response.data);
-                    this.getMyHeaderLinks();
-                    this.$router.push('/cabinet')
-                    //this.$pusher.push('/cabinet') error
+                    localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN']);
+                    this.$router.push({name:'cabinet'});
                 })
                 .catch(error =>{
-
+                    console.log(error.response);
                 })
             })
         }

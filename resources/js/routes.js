@@ -1,3 +1,7 @@
+import VueRouter from "vue-router";
+import Vue from 'vue';
+Vue.use(VueRouter);
+
 import App from './vue/todolist/app'
 import Chat from './vue/chat/chat'
 import Register from './vue/auth/Register'
@@ -9,7 +13,9 @@ import Dropdown from './vue/test/Dropdown'
 import Test from './vue/auth/Test'
 import Products from './vue/products/Products'
 import Menus from './vue/menus/Menus'
-export default{
+
+
+const router = new VueRouter({
 
     mode:'history',
     routes:[
@@ -36,6 +42,7 @@ export default{
         {
             path:"/cabinet",
             component: Cabinet,
+            name: 'cabinet'
 
         },
         {
@@ -46,6 +53,7 @@ export default{
         {
             path:"/dishes",
             component: Dishes,
+            name: 'dishes'
 
         },
         {
@@ -61,18 +69,35 @@ export default{
         {
             path:"/products",
             component: Products,
+            name: 'products'
 
         },
         {
             path:"/menus",
             component: Menus,
-            /*beforeEnter(to, from, next) {
-                if (isAuthenticated()) {
-                    next();
-                } else {
-                    next('/login');
-                }
-            }*/
+            name: 'menus'
         },
     ]
-}
+});
+router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem('x_xsrf_token');
+    if(!token){
+        //alert('token not have');
+        if(to.name === 'login'){
+            //alert('go to after login');
+            return next();
+        }else{
+            return next({name:"login"})
+        }
+    }else{
+        //alert('token have');
+        if(to.name === 'login') {
+            return next({name: "cabinet"});
+        }else{
+            return next();
+        }
+    }
+    return next();
+});
+export default router
+
