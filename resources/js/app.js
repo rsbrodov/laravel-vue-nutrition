@@ -1,8 +1,8 @@
 require('./bootstrap');
 window.Vue = require('vue').default;
 import Vue from 'vue';
-import VueRouter from 'vue-router'
-import routes from './routes'
+
+import router from './routes'
 import BootstrapVue from 'bootstrap-vue'
 import Vuelidate from 'vuelidate'
 
@@ -20,16 +20,16 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
 //import "import '@/resources/css/app.css"
 
-Vue.use(VueRouter)
-Vue.use(BootstrapVue)
-Vue.use(Vuelidate)
-library.add(faPlusSquare, faTrash, faPencilAlt, faCopy)
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.use(BootstrapVue);
+Vue.use(Vuelidate);
+library.add(faPlusSquare, faTrash, faPencilAlt, faCopy);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 const app = new Vue({
     el:'#app',
-    router: new VueRouter(routes),
+    router,
     store,
 
     //components: { App }

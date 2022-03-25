@@ -11,10 +11,10 @@ class Menu extends Model
 
     public function nutritions(){
         //return $this->hasMany(MenuNutrition::class);
-        return $this->hasMany(MenuNutrition::class, 'menu_id', 'id')
+        /*return $this->hasMany('App\Models\MenuNutrition', 'menu_id', 'id')
             ->join('nutritions', 'nutritions.id', '=', 'menu_nutrition.nutrition_id')
-            ->select('menu_nutrition.*', 'nutritions.name AS nutrition_name')
-            ->get();
+            ->select('menus.*', 'menu_nutrition.*', 'nutritions.*')
+            ->get();*/
     }
 
     public function days(){

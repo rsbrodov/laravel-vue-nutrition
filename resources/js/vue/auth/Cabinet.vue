@@ -22,15 +22,14 @@ export default {
             token: localStorage.getItem('token')
         }
     },
-    computed: mapGetters(['myRoles', 'myHeader_links']),
+    computed: mapGetters(['myRoles']),
     methods:{
-        ...mapActions(['getMyRoles', 'getMyHeaderLinks']),
+        ...mapActions(['getMyRoles']),
         logout(){
-            axios.post('api/logout');
-            localStorage.removeItem('token')
+            axios.post('/logout')
             .then(response => {
                 console.log(response);
-                this.getMyHeaderLinks();
+                localStorage.removeItem('x_xsrf_token');
                 this.$router.push('/login');
             })
             .catch(error =>{
@@ -38,8 +37,7 @@ export default {
             })
         },
     },
-    async mounted(){
-        window.axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
+    async created(){
         axios.get('api/user')
         .then(response =>{
             this.user = response

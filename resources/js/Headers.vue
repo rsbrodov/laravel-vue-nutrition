@@ -7,16 +7,14 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
-       <li class="nav-item" v-for="(link, index) in myHeader_links" :key="index">
-            <router-link class="nav-link" :to="index">{{ link }}</router-link>
-        </li>
+       <li class="nav-item"><router-link class="nav-link" v-if="token" :to="{name: 'dishes'}">Блюда</router-link></li>
+       <li class="nav-item"><router-link class="nav-link" v-if="token" :to="{name: 'products'}">Продукты</router-link></li>
+       <li class="nav-item"><router-link class="nav-link" v-if="token" :to="{name: 'menus'}">Мои меню</router-link></li>
+       <li class="nav-item"><router-link class="nav-link" v-if="token" :to="{name: 'cabinet'}">Личный кабинет</router-link></li>
+       <li class="nav-item"><router-link class="nav-link" v-if="!token" :to="{name: 'login'}">Авторизация</router-link></li>
     </ul>
-    <!-- <span class="navbar-text">
-      Navbar text with an inline element
-    </span> -->
   </div>
 </nav>
-
 </div>
 </template>
 
@@ -25,17 +23,17 @@ import {mapGetters, mapActions} from 'vuex'
     export default {
         data() {
             return {
-
+                token: null,
             }
         },
-        computed: mapGetters(['myHeader_links']),
         methods:{
-        ...mapActions(['getMyHeaderLinks']),
+            getToken(){
+                this.token = localStorage.getItem('x_xsrf_token');
+            },
         },
-        async created(){
-            this.getMyHeaderLinks()
-
-        },
+        async mounted(){
+            this.getToken()
+        }
     }
 </script>
 
