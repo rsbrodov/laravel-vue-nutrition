@@ -16,9 +16,9 @@ class CreateDishesProductsTable extends Migration
         Schema::create('dishes_products', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('dishes_id')->unsigned()->index();
-            $table->foreign('dishes_id')->references('id')->on('dishes');
+            $table->foreign('dishes_id')->references('id')->on('dishes')->onDelete('cascade');
             $table->bigInteger('products_id')->unsigned()->index();
-            $table->foreign('products_id')->references('id')->on('products');
+            $table->foreign('products_id')->references('id')->on('products')->onDelete('cascade');
             $table->double('net_weight');
             $table->double('gross_weight');
             $table->timestamps();

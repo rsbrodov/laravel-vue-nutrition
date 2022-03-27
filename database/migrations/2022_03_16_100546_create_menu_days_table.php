@@ -16,7 +16,7 @@ class CreateMenuDaysTable extends Migration
         Schema::create('menu_days', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('menu_id')->unsigned()->index();
-            $table->foreign('menu_id')->references('id')->on('menus');
+            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
             $table->integer('days_id');
             $table->timestamps();
         });

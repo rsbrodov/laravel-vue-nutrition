@@ -79,3 +79,4 @@ Route::post('/menus/store', [MenuController::class, 'store']);
 Route::delete('/menus/{id}', [MenuController::class, 'destroy']);
 Route::get('/menus/menu-characters/{id}', [MenuController::class, 'menuCharacters']);
 Route::post('/dishes-products/store', [DishesProductsController::class, 'store']);
+Route::delete('/{id}', [DishesProductsController::class, 'destroy']);

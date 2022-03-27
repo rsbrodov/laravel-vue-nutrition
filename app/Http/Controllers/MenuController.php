@@ -46,7 +46,6 @@ class MenuController extends Controller
         $new_menu = New Menu();
         $new_menu->name = $request->form['name'];
         $new_menu->parent_id = 0;
-        $new_menu->cycle = $request->form['cycle'];
         $new_menu->save();
 
         if($request->form['days1'] == true){

@@ -16,7 +16,7 @@ class CreateMenuNutritionTable extends Migration
         Schema::create('menu_nutrition', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('menu_id')->unsigned()->index();
-            $table->foreign('menu_id')->references('id')->on('menus');
+            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');;
             $table->integer('nutrition_id');
             $table->timestamps();
         });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CulinaryProcessing;
 use App\Models\Dishes;
 use App\Models\DishesCategory;
+use App\Models\DishesProducts;
 use App\Models\RecipesCollection;
 use Illuminate\Http\Request;
 
@@ -133,6 +134,17 @@ class DishesController extends Controller
         $new_dish->dishes_characters = $dish->dishes_characters;
         $new_dish->techmap_number = $dish->techmap_number;
         $new_dish->save();
+        $dishes_products = DishesProducts::where('dishes_id', $id)->get();
+        if(!empty($dishes_products)){
+            foreach($dishes_products as $dishes_product){
+                $new = new DishesProducts();
+                $new->dishes_id = $new_dish->id;
+                $new->products_id = $dishes_product->products_id;
+                $new->net_weight = $dishes_product->net_weight;
+                $new->gross_weight = $dishes_product->gross_weight;
+                $new->save();
+            }
+        }
         return $new_dish;
     }
 
