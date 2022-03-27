@@ -1,16 +1,17 @@
 <template>
   <div style="width:90%; margin: 0 auto;">
-    
+
     <h1 class="text-center">Разработка блюд</h1>
-     
+
     <b-button v-b-modal.modal-1 variant="success" class="mb-4">Создать новое блюдо</b-button>
 
     <b-modal id="modal-1" class="mb-4" title="Добавление нового блюда" >
         <addDish/>
     </b-modal>
 
-    <b-modal id="modal-2" title="Добавление продуктов в блюдо" >
-        
+
+    <b-modal id="modal-2" size="lg" title="Добавление продуктов в блюдо" >
+
             <p v-if="oneDish">{{oneDish[0].name}}</p>
             <div v-if="productsOfDish">
               <table class="table">
@@ -33,18 +34,27 @@
                   </tr>
                 </tbody>
               </table>
-
-                <!-- <form id="dataForm">
-                <input id="inputId" list="dataListId" value="" v-model="selectProductId"  @change="onChange($event)" placeholder="Выберите продукт">
-                <datalist id="dataListId" @change="onChange($event)">
-                  <option v-for="(product, index) in allProducts" :key="index" :data-id="product.id">{{product.name}}</option>
-                </datalist>
-                <button id="submitButton" type="submit" @click="addProduct()">Submit</button>
-                <div id="resultID" class="resultID"></div>
-              </form> -->
-
+                <p class="text-center">Добавление продуктов в блюдо</p>
+                 <form id="dataForm" @submit.prevent="addProduct()">
+                     <div class="row">
+                         <div class="col-4">
+                             <label for="products_id"><b>Выберите продукт</b></label>
+                             <select id="products_id" class="form-control" v-model="form.products_id">
+                                 <option v-for="(product, index) in allProducts" :key="index" :value="product.id">{{product.name}}</option>
+                             </select>
+                         </div>
+                         <div class="col-4">
+                             <label for="gross_weight"><b>Масса брутто</b></label>
+                             <input id="gross_weight" class="form-control" type="text" v-model="form.gross_weight">
+                         </div>
+                         <div class="col-4">
+                             <label for="net_weight"><b>Масса нетто</b></label>
+                             <input id="net_weight" class="form-control" type="text" v-model="form.net_weight">
+                         </div>
+                     </div>
+                     <button class="btn btn-success mt-3">Добавить</button>
+                 </form>
             </div>
-    
     </b-modal>
 
     <table class="table table-bordered">
@@ -65,7 +75,7 @@
           @addProductsDish="addProductsDish"/>
   </tbody>
 </table>
-    
+
 </div>
 </template>
 
@@ -80,57 +90,45 @@ export default{
     components:{addDish, Dish, VueSuggestion},
     data:function(){
         return {
-          item: {},
-        items: [
-          { id: 1, name: 'Golden Retriever' },
-          { id: 2, name: 'Cat' },
-          { id: 3, name: 'Squirrel' },
-        ],
+            form:{
+                products_id:null,
+                dishes_id:null,
+                net_weight:null,
+                gross_weight:null,
+            }
+
         }
     },
     computed: mapGetters(['myDishes', 'oneDish', 'productsOfDish', 'allProducts']),
-    methods:{
-        ...mapActions(['getMyDishes', 'getOneDish', 'getProductsDish', 'getProducts']),
-        addProductsDish(e){
-          this.getOneDish(e);
-          this.getProductsDish(e)
-          
-          this.$bvModal.show('modal-2')
-        },
-        addProduct(){
-         
-          var selectedOption = dataListId.options.namedItem(inputId.value);
-          if (selectedOption) {
-              var selectedId = selectedOption.getAttribute('data-id');
-              var result = "Country ID: " + selectedId;
-              console.log(selectedId);
-          } else {
-              var result = "No ID available for value: " + inputId.value;
-          }
-          document.getElementById('resultID').textContent = result; 
-        console.log(123);
-        },
+    methods: {
+        ...mapActions(['getMyDishes', 'getOneDish', 'getProductsDish', 'getProducts', 'newProductsDish']),
+        addProductsDish(e) {
+            this.getOneDish(e);
+            this.getProductsDish(e);
 
+            this.$bvModal.show('modal-2')
+        },
+        addProduct() {
+            this.form.dishes_id = this.oneDish[0].id;
+            this.newProductsDish({
+                form: this.form
+            }).then(response => {
+                this.form.products_id = '';
+                this.form.net_weight = '';
+                this.form.gross_weight = '';
+            }).catch(error => {
+                console.log(error);
+            });
+            //this.$bvModal.hide('modal-2')
 
-        itemSelected(item) {
-        this.item = item;
-      },
-      setLabel(item) {
-        return item.name;
-      },
-      inputChange(text) {
-        // your search method
-        this.items = this.items.filter((item) => item.name.indexOf(text) > -1);
-        // now `items` will be showed in the suggestion list
-      },
-      
-      },
+        },
+    },
 
 
 
     async created(){
-      this.getMyDishes()
-      this.getProducts()
+      this.getMyDishes();
+      this.getProducts();
     },
 }
 
