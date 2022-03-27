@@ -20,7 +20,7 @@ window.axios.interceptors.response.use({}, error => {
         if(token){
             localStorage.removeItem('x_xsrf_roken');
         }
-        router.push({name:'login'});
+        this.$router.push({name:'login'});
     }
 });
 

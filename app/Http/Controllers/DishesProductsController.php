@@ -35,7 +35,13 @@ class DishesProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dishes_products = New DishesProducts();
+        $dishes_products->dishes_id = $request->form['dishes_id'];
+        $dishes_products->products_id = $request->form['products_id'];
+        $dishes_products->net_weight = $request->form['net_weight'];
+        $dishes_products->gross_weight = $request->form['gross_weight'];
+        $dishes_products->save();
+        return DishesProducts::where('id', $dishes_products->id)->get();
     }
 
     /**
