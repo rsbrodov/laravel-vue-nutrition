@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Day;
+use App\Models\MenuDays;
 use App\Models\MenuDishes;
+use App\Models\MenuNutrition;
+use App\Models\Nutrition;
 use Illuminate\Http\Request;
 
 class MenuDishesController extends Controller
@@ -81,5 +85,25 @@ class MenuDishesController extends Controller
     public function destroy(MenuDishes $menuDishes)
     {
         //
+    }
+
+    public function getNutritions($id)
+    {
+        $menus_nutrition = MenuNutrition::where('menu_id', $id)->get();
+        $result = [];
+        foreach($menus_nutrition as $menu_nutrition){
+            $result[$menu_nutrition->nutrition_id] = Nutrition::where('id', $menu_nutrition->nutrition_id)->first()->name;
+        }
+        return $result;
+    }
+
+    public function getDays($id)
+    {
+        $menus_days = MenuDays::where('menu_id', $id)->get();
+        $result = [];
+        foreach($menus_days as $menus_day){
+            $result[$menus_day->days_id] = Day::where('id', $menus_day->days_id)->first()->name;
+        }
+        return $result;
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\DishesController;
 use App\Http\Controllers\DishesProductsController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\MenuDishesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CulinaryProcessings;
 use App\Http\Controllers\ChatController;
@@ -80,3 +81,6 @@ Route::delete('/menus/{id}', [MenuController::class, 'destroy']);
 Route::get('/menus/menu-characters/{id}', [MenuController::class, 'menuCharacters']);
 Route::post('/dishes-products/store', [DishesProductsController::class, 'store']);
 Route::delete('/{id}', [DishesProductsController::class, 'destroy']);
+
+Route::get('menus-dishes/nutritions/{id}', [MenuDishesController::class, 'getNutritions']);
+Route::get('menus-dishes/days/{id}', [MenuDishesController::class, 'getDays']);
