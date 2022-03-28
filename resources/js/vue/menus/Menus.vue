@@ -11,7 +11,6 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Название</th>
-        <th scope="col" class="text-center">Цикл</th>
         <th scope="col" class="text-center">Приемы пищи</th>
         <th scope="col" class="text-center">Дни</th>
       </tr>
@@ -20,7 +19,6 @@
           <tr v-for="(myMenu, index) in allMenus" :key="index" >
               <td>{{myMenu.id}}</td>
               <td>{{myMenu.name}}</td>
-              <td>{{myMenu.cycle}}</td>
               <td>{{ myMenu.nutritions}}</td>
 <!--              <td><span v-for="nutrition in myMenu.days">{{ nutrition.days_id }}, </span></td>-->
               <td class="text-center"><b-button variant="danger" @click="removeMenus(myMenu.id)">

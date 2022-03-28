@@ -13,6 +13,7 @@ import Dropdown from './vue/test/Dropdown'
 import Test from './vue/auth/Test'
 import Products from './vue/products/Products'
 import Menus from './vue/menus/Menus'
+import MenusDishes from './vue/menus-dishes/Index'
 
 
 const router = new VueRouter({
@@ -71,6 +72,11 @@ const router = new VueRouter({
             component: Products,
             name: 'products'
 
+        },
+        {
+            path:"/menus-dishes",
+            component: MenusDishes,
+            name: 'menus-dishes'
         },
         {
             path:"/menus",

@@ -9,13 +9,6 @@
         </small>
 
 
-    <label for="sort"><b>Количество недель в меню</b></label>
-    <input id="sort" class="form-control" type="text" v-model="form.cycle">
-    <small class="helper-text invalid" v-if="$v.form.cycle.$dirty && !$v.form.cycle.required">
-        Введите количество недель
-    </small>
-
-
     <div class="border-block" id="day-indicator">
         <p style="font-size: 18px;"><b>Дни меню <small>(отметьте нужные варианты галочками)</small></b></p>
         <div class="day-container">
@@ -74,7 +67,6 @@ export default{
         return {
             form:{
                 name:'',
-                cycle:'',
                 days1:'',
                 days2:'',
                 days3:'',
@@ -110,7 +102,6 @@ export default{
     validations: {
         form:{
             name: {required},
-            cycle: {required},
         }
 
     },

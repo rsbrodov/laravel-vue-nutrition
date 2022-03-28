@@ -10,6 +10,7 @@
        <li class="nav-item"><router-link class="nav-link" :to="{name: 'dishes'}">Блюда</router-link></li>
        <li class="nav-item"><router-link class="nav-link" :to="{name: 'products'}">Продукты</router-link></li>
        <li class="nav-item"><router-link class="nav-link" :to="{name: 'menus'}">Мои меню</router-link></li>
+       <li class="nav-item"><router-link class="nav-link" :to="{name: 'menus-dishes'}">Работа с меню</router-link></li>
        <li class="nav-item"><router-link class="nav-link" :to="{name: 'cabinet'}">Личный кабинет</router-link></li>
        <li class="nav-item"><router-link class="nav-link"  :to="{name: 'login'}">Авторизация</router-link></li>
     </ul>

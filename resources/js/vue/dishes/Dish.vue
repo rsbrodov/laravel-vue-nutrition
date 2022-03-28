@@ -9,7 +9,7 @@
             <font-awesome-icon icon="trash"/>
         </b-button></td>
 
-        <td class="text-center"><b-button variant="warnig" @click="$emit('addProductsDish', dish.id)">
+        <td class="text-center"><b-button variant="success" @click="$emit('addProductsDish', dish.id)">
            <font-awesome-icon icon="plus-square"/>
         </b-button></td>
 
@@ -17,10 +17,10 @@
            <font-awesome-icon icon="copy"/>
         </b-button></td>
 
-        
-        
+
+
     </tr>
-    
+
 </template>
 <script>
 import {mapGetters, mapActions} from 'vuex'
