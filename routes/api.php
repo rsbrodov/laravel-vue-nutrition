@@ -84,3 +84,4 @@ Route::delete('/{id}', [DishesProductsController::class, 'destroy']);
 
 Route::get('menus-dishes/nutritions/{id}', [MenuDishesController::class, 'getNutritions']);
 Route::get('menus-dishes/days/{id}', [MenuDishesController::class, 'getDays']);
+Route::post('/menus-dishes/store', [MenuDishesController::class, 'store']);
