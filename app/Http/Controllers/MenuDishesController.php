@@ -39,7 +39,16 @@ class MenuDishesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_menu = New MenuDishes();
+        $new_menu->dishes_id =$request->form['dishes_id'];
+        $new_menu->menu_id = 2;//$request->form['menu_id'];
+        $new_menu->days_id = $request->form['day_id'];
+        $new_menu->nutrition_id = $request->form['nutrition_id'];
+        $new_menu->yield = $request->form['yield'];
+        $new_menu->cycle = 1;
+        $new_menu->save();
+        return MenuDishes::where('id', $new_menu->id)->get();
+        //return $request;
     }
 
     /**

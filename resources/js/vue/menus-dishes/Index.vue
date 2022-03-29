@@ -30,8 +30,32 @@
               </div>
           </div>
           <button class="btn btn-success mt-4 justify-content-center">Посмотреть</button>
-          {{post}}
       </form>
+
+
+      <div class="container" v-if="post">
+          <form @submit.prevent="menusDishesStore()">
+              <div class="row">
+                  <div class="col-4">
+                      <label for="dishes_id"><b>Блюдо</b></label>
+                      <select id="dishes_id" class="form-control" v-model="form.dishes_id">
+                          <option v-for="(dish, index) in myDishes" :key="index" :value="dish.id">
+                              {{dish.name}}
+                          </option>
+                      </select>
+                  </div>
+                  <div class="col-4">
+                      <label for="yield"><b>Выход в граммах</b></label>
+                      <input id="yield" class="form-control" type="text" v-model="form.yield">
+                  </div>
+                  <div class="col-4">
+                      <button class="btn btn-success mt-4 justify-content-center">Добавить в меню</button>
+                  </div>
+              </div>
+
+          </form>
+      </div>
+      {{form}}
 </div>
 </template>
 
@@ -52,13 +76,16 @@ export default{
                 menu_id: 2,
                 day_id:'',
                 nutrition_id:'',
-            },
+                dishes_id:null,
+                yield:null,
+            }
         }
     },
-    computed: mapGetters(['allMenus']),
+    computed: mapGetters(['myDishes','allMenus']),
     methods:{
-        ...mapActions(['getMenus']),
+        ...mapActions(['getMyDishes', 'getMenus', 'getNewMenuDishes']),
         menusDishesIndex(){
+            this.getMyDishes();
             this.post = this.form.day_id;
         },
         getNutritions(){
@@ -78,6 +105,14 @@ export default{
                 .catch(error => {
                     console.log(error);
                 })
+        },
+        menusDishesStore(){
+            this.getNewMenuDishes({
+                form: this.form
+            })
+            .then(response => {
+                console.log(response);
+            })
         }
     },
 
