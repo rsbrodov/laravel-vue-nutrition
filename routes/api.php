@@ -76,6 +76,7 @@ Route::get('/products/products-category', [ProductsController::class, 'productsC
 Route::delete('/products/{id}', [ProductsController::class, 'destroy']);
 
 Route::get('/menus', [MenuController::class, 'index']);
+Route::get('/menus/first-menu', [MenuController::class, 'firstMenu']);
 Route::post('/menus/store', [MenuController::class, 'store']);
 Route::delete('/menus/{id}', [MenuController::class, 'destroy']);
 Route::get('/menus/menu-characters/{id}', [MenuController::class, 'menuCharacters']);
@@ -85,3 +86,4 @@ Route::delete('/{id}', [DishesProductsController::class, 'destroy']);
 Route::get('menus-dishes/nutritions/{id}', [MenuDishesController::class, 'getNutritions']);
 Route::get('menus-dishes/days/{id}', [MenuDishesController::class, 'getDays']);
 Route::post('/menus-dishes/store', [MenuDishesController::class, 'store']);
+Route::post('/menus-dishes/index', [MenuDishesController::class, 'index']);

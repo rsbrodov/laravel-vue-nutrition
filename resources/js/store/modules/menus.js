@@ -2,7 +2,9 @@ export default{
     state: {
         menus:'',
         new_menu:'',
-        menu_dishes:'',
+        new_menu_dishes:'',
+        menus_dishes:'',
+        first_menu:'',
     },
     getters: {
         allMenus(state){
@@ -12,41 +14,61 @@ export default{
             return state.new_menu
         },
         newMenuDishes(state){
-            return state.menu_dishes
+            return state.new_menu_dishes
+        },
+        menusDishes(state){
+            return state.menus_dishes
+        },
+        firstMenu(state){
+            return state.first_menu
         },
     },
     mutations: {
         updateMenus(state, menus){
             state.menus = menus
         },
+        firstMenu(state, first_menu){
+            state.first_menu = first_menu
+        },
         addingMenu(state, newMenu){
             state.menus.unshift(newMenu)
         },
-        addingMenuDishes(state, newMenuDishes){
-            //state.menu_dishes.unshift(newMenuDishes)
+        updateMenusDishes(state, menus_dishes){
+            state.menus_dishes = menus_dishes
+        },
+        addingMenusDishes(state, newMenuDishes){
+            state.menus_dishes.unshift(newMenuDishes)
         },
     },
     actions: {
         async getMenus(ctx){
-            const menus = await axios.get('api/menus/')
+            const menus = await axios.get('api/menus/');
             ctx.commit('updateMenus', menus.data)
         },
+        async getFirstMenu(ctx){
+            const first_menu = await axios.get('api/menus/first-menu/');
+            ctx.commit('firstMenu', first_menu.data)
+        },
         async getNewMenu(ctx, form){
-            const new_menu = await axios.post('api/menus/store', form)
-            ctx.commit('addingMenu', new_menu.data)
-            const menus = await axios.get('api/menus/')
+            const new_menu = await axios.post('api/menus/store', form);
+            ctx.commit('addingMenu', new_menu.data);
+            const menus = await axios.get('api/menus/');
             ctx.commit('updateMenus', menus.data)
         },
         async deleteMenu(ctx, id){
-            await axios.delete('api/menus/'+id)
-            const menus = await axios.get('api/menus/')
+            await axios.delete('api/menus/'+id);
+            const menus = await axios.get('api/menus/');
             ctx.commit('updateMenus', menus.data)
         },
+        async getMenusDishes(ctx, form){
+            const menus_dishes = await axios.post('api/menus-dishes/index/', form);
+            ctx.commit('updateMenusDishes', menus_dishes.data)
+        },
         async getNewMenuDishes(ctx, form){
-            const new_menu_dishes = await axios.post('api/menus-dishes/store', form)
-            ctx.commit('addingMenuDishes', new_menu_dishes.data)
-            /*const menus = await axios.get('api/menus/')
-            ctx.commit('updateMenus', menus.data)*/
+            await axios.post('api/menus-dishes/store', form);
+
+            const menus_dishes = await axios.post('api/menus-dishes/index/', form);
+            ctx.commit('updateMenusDishes', menus_dishes.data)
         },
     },
 }

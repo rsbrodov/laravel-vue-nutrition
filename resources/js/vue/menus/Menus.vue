@@ -19,7 +19,7 @@
           <tr v-for="(myMenu, index) in allMenus" :key="index" >
               <td>{{myMenu.id}}</td>
               <td>{{myMenu.name}}</td>
-              <td>{{ myMenu.nutritions}}</td>
+              <td></td>
 <!--              <td><span v-for="nutrition in myMenu.days">{{ nutrition.days_id }}, </span></td>-->
               <td class="text-center"><b-button variant="danger" @click="removeMenus(myMenu.id)">
                   <font-awesome-icon icon="trash"/>

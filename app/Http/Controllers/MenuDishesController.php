@@ -16,9 +16,10 @@ class MenuDishesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $menus_dishes = MenuDishes::with('dishes')->where(['menu_id' => $request->form['menu_id'], 'nutrition_id' => $request->form['nutrition_id'], 'days_id' => $request->form['day_id']])->get();
+        return $menus_dishes;
     }
 
     /**
@@ -41,7 +42,7 @@ class MenuDishesController extends Controller
     {
         $new_menu = New MenuDishes();
         $new_menu->dishes_id =$request->form['dishes_id'];
-        $new_menu->menu_id = 2;//$request->form['menu_id'];
+        $new_menu->menu_id = $request->form['menu_id'];
         $new_menu->days_id = $request->form['day_id'];
         $new_menu->nutrition_id = $request->form['nutrition_id'];
         $new_menu->yield = $request->form['yield'];
