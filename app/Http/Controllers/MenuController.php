@@ -20,8 +20,8 @@ class MenuController extends Controller
         select(['menus.name as name', 'menu_nutrition.nutrition_id as nutrition_id'])->
         join('menu_nutrition', 'menu_nutrition.menu_id', '=', 'menus.id')->
         get();*/
-        $menus = Menu::get();
-        //$menus = Menu::join('menu_nutrition', 'menu_nutrition.menu_id', '=', 'menus.id')->get();
+
+        $menus = Menu::with('nutritions')->get();
         return $menus;
     }
 
