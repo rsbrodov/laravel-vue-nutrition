@@ -21,7 +21,7 @@ class MenuController extends Controller
         join('menu_nutrition', 'menu_nutrition.menu_id', '=', 'menus.id')->
         get();*/
 
-        $menus = Menu::with('nutritions')->get();
+        $menus = Menu::with('nutritions', 'days')->get();
         return $menus;
     }
 
