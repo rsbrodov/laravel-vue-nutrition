@@ -19,8 +19,8 @@
           <tr v-for="(myMenu, index) in allMenus" :key="index" >
               <td>{{myMenu.id}}</td>
               <td>{{myMenu.name}}</td>
-              <td></td>
-<!--              <td><span v-for="nutrition in myMenu.days">{{ nutrition.days_id }}, </span></td>-->
+              <td>{{ myMenu.nutritions | nutrition_separator }}</td>
+              <td>{{ myMenu.days | day_separator }}</td>
               <td class="text-center"><b-button variant="danger" @click="removeMenus(myMenu.id)">
                   <font-awesome-icon icon="trash"/>
               </b-button></td>
@@ -47,6 +47,22 @@ export default{
         ...mapActions(['getMenus', 'deleteMenu']),
         removeMenus(id){
             this.deleteMenu(id)
+        },
+    },
+    filters: {
+        nutrition_separator: function (nutritions) {
+            let result = '';
+            nutritions.forEach(function(nutrition, i, nutritions) {
+                result += nutrition.name + ', ';
+            });
+            return result;
+        },
+        day_separator: function (days) {
+            let result = '';
+            days.forEach(function(day, i, days) {
+                result += day.name + ', ';
+            });
+            return result;
         },
     },
 

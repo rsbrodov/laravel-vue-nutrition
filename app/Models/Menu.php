@@ -11,10 +11,11 @@ class Menu extends Model
 
     public function nutritions(){
         //return $this->hasMany(MenuNutrition::class);
-        return $this->hasManyThrough(Nutrition::class, MenuNutrition::class);
+        //return $this->hasManyThrough(Nutrition::class, MenuNutrition::class);
+        return $this->belongsToMany(Nutrition::class, 'menu_nutrition', 'menu_id', 'nutrition_id');
     }
 
     public function days(){
-        return $this->hasMany(MenuDays::class);
+        return $this->belongsToMany(Day::class, 'menu_days', 'menu_id', 'days_id');
     }
 }
