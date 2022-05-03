@@ -1,6 +1,6 @@
 export default{
     state: {
-        menus:'',
+        menus:[],
         new_menu:'',
         new_menu_dishes:'',
         menus_dishes:'',
