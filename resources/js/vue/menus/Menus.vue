@@ -35,6 +35,7 @@
         <th scope="col">Название</th>
         <th scope="col" class="text-center">Приемы пищи</th>
         <th scope="col" class="text-center">Дни</th>
+        <th scope="col" class="text-center">Дата создания</th>
       </tr>
     </thead>
     <tbody>
@@ -43,6 +44,7 @@
               <td>{{myMenu.name}}</td>
               <td>{{myMenu.nutritions | nutrition_separator }}</td>
               <td>{{myMenu.days | day_separator }}</td>
+              <td>{{myMenu | dateCreated }}</td>
               <td class="text-center"><b-button variant="danger" @click="removeMenus(myMenu.id)">
                   <font-awesome-icon icon="trash"/>
               </b-button></td>
@@ -57,6 +59,7 @@ import addMenu from './AddMenu'
 import {mapGetters, mapActions} from 'vuex'
 import {VueSuggestion} from 'vue-suggestion'
 import 'vue-suggestion/dist/vue-suggestion.css'
+import moment from 'moment'
 
 export default{
     components:{addMenu},
@@ -79,7 +82,7 @@ export default{
             })*//*.filter((dictionary) => {
                     return dictionary.archive.match(this.filter_form.archive);
                 })*/;
-        }
+        },
     },
 
     methods:{
@@ -92,16 +95,28 @@ export default{
         nutrition_separator: function (nutritions) {
             let result = '';
             nutritions.forEach(function(nutrition, i, nutritions) {
-                result += nutrition.name + ', ';
+                if(nutritions.length > i+1){
+                    result += nutrition.name + ', ';
+                }else{
+                    result += nutrition.name;
+                }
             });
             return result;
         },
         day_separator: function (days) {
             let result = '';
             days.forEach(function(day, i, days) {
-                result += day.name + ', ';
+                if(days.length > i+1){
+                    result += day.name + ', ';
+                }else{
+                    result += day.name;
+                }
+
             });
             return result;
+        },
+        dateCreated: function (menu) {
+            return moment(menu.created_at).format('DD.MM.YYYY HH:II');
         },
     },
 
