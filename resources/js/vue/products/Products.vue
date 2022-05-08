@@ -3,7 +3,7 @@
 
     <h1 class="text-center">Список продуктов</h1>
       <b-button v-b-modal.modal-1 variant="success" class="mb-4">Создать новый продукт</b-button>
-      <b-modal id="modal-1" class="mb-4" title="Добавление нового продукта" >
+      <b-modal id="modal-1" class="mb-4" size="lg" title="Добавление нового продукта" >
           <addProduct/>
       </b-modal>
     <table class="table table-bordered">
