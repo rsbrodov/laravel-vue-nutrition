@@ -5,8 +5,8 @@
 
     <b-button v-b-modal.modal-1 variant="success" class="mb-4">Создать новое блюдо</b-button>
 
-    <b-modal id="modal-1" class="mb-4" title="Добавление нового блюда" >
-        <addDish/>
+    <b-modal id="modal-1" class="mb-4" size="lg" title="Добавление нового блюда" >
+        <addDish @close-modal="closeModal('dishCreate')"></addDish>
     </b-modal>
 
 
@@ -122,6 +122,9 @@ export default{
             //this.$bvModal.hide('modal-2')
 
         },
+        closeModal(id){
+            this.$bvModal.hide('modal-1')
+        }
     },
 
 
