@@ -131,7 +131,7 @@ class ProductsController extends Controller
 
     public function productsCategory()
     {
-        $products_category = ProductsCategory::all();
+        $products_category = ProductsCategory::orderBy('sort', 'asc')->get();
         return $products_category;
     }
 }

@@ -12,9 +12,12 @@
         <th scope="col">ID</th>
         <th scope="col">Название</th>
         <th scope="col" class="text-center">Категория</th>
-        <th scope="col" class="text-center">Вода</th>
         <th scope="col" class="text-center">Белки</th>
         <th scope="col" class="text-center">Жиры</th>
+        <th scope="col" class="text-center">Углеводы</th>
+        <th scope="col" class="text-center">Витамин А</th>
+        <th scope="col" class="text-center">Витамин B1</th>
+        <th scope="col" class="text-center">Витамин B2</th>
       </tr>
     </thead>
     <tbody>
@@ -22,9 +25,12 @@
               <td>{{myProduct.id}}</td>
               <td>{{myProduct.name}}</td>
               <td>{{myProduct.products_categories.name}}</td>
-              <td>{{myProduct.water}}</td>
               <td>{{myProduct.protein}}</td>
               <td>{{myProduct.fat}}</td>
+              <td>{{myProduct.carbohydrates_total}}</td>
+              <td>{{myProduct.vitamin_a}}</td>
+              <td>{{myProduct.vitamin_b1}}</td>
+              <td>{{myProduct.vitamin_b2}}</td>
               <td class="text-center"><b-button variant="danger" @click="removeProducts(myProduct.id)">
                   <font-awesome-icon icon="trash"/>
               </b-button></td>
