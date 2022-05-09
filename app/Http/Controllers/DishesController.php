@@ -106,7 +106,7 @@ class DishesController extends Controller
 
     public function dishesCategories()
     {
-        $dishes_categories = DishesCategory::all();
+        $dishes_categories = DishesCategory::orderBy('sort', 'asc')->get();
         return $dishes_categories;
     }
 
