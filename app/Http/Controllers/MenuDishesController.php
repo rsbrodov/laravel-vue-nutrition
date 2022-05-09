@@ -7,6 +7,7 @@ use App\Models\MenuDays;
 use App\Models\MenuDishes;
 use App\Models\MenuNutrition;
 use App\Models\Nutrition;
+use App\Services\MenusDishesService;
 use Illuminate\Http\Request;
 
 class MenuDishesController extends Controller
@@ -114,6 +115,15 @@ class MenuDishesController extends Controller
         foreach($menus_days as $menus_day){
             $result[$menus_day->days_id] = Day::where('id', $menus_day->days_id)->first()->name;
         }
+        return $result;
+    }
+
+    public function getReport(Request $request)
+    {
+        $services = new MenusDishesService();
+        //$result = $services->CalculateMenuInfo($request['menu_id']);
+        $result = $services->get_bju_dish(19, 'protein');
+
         return $result;
     }
 }

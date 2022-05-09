@@ -14,6 +14,7 @@ import Test from './vue/auth/Test'
 import Products from './vue/products/Products'
 import Menus from './vue/menus/Menus'
 import MenusDishes from './vue/menus-dishes/Index'
+import Report from './vue/menus-dishes/Report'
 
 
 const router = new VueRouter({
@@ -83,20 +84,22 @@ const router = new VueRouter({
             component: Menus,
             name: 'menus'
         },
+        {
+            path:"/report",
+            component: Report,
+            name: 'report'
+        },
     ]
 });
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('x_xsrf_token');
     if(!token){
-        //alert('token not have');
         if(to.name === 'login'){
-            //alert('go to after login');
             return next();
         }else{
             return next({name:"login"})
         }
     }else{
-        //alert('token have');
         if(to.name === 'login') {
             return next({name: "cabinet"});
         }else{
