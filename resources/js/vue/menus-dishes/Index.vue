@@ -1,5 +1,5 @@
 <template>
-  <div style="width:90%; margin: 0 auto;">
+  <div style="width:80%; margin: 0 auto;">
 
     <h1 class="text-center">Работа с меню</h1>
       <form @submit.prevent="menusDishesIndex()">

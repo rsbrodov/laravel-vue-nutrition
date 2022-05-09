@@ -44,10 +44,6 @@ Route::prefix('/chat')->group(function(){
     Route::post('/store', [ChatController::class, 'store']);
 });
 
-/*Route::post('/register', [RegisterController::class, 'register']);
-Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout']);*/
-
 
 $nameUrl = '/dishes';
 $nameMethod = 'index';
@@ -84,6 +80,7 @@ Route::post('/dishes-products/store', [DishesProductsController::class, 'store']
 Route::delete('/{id}', [DishesProductsController::class, 'destroy']);
 
 Route::get('menus-dishes/nutritions/{id}', [MenuDishesController::class, 'getNutritions']);
+Route::post('menus-dishes/report', [MenuDishesController::class, 'getReport']);
 Route::get('menus-dishes/days/{id}', [MenuDishesController::class, 'getDays']);
 Route::post('/menus-dishes/store', [MenuDishesController::class, 'store']);
 Route::post('/menus-dishes/index', [MenuDishesController::class, 'index']);
