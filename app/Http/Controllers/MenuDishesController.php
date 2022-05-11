@@ -122,7 +122,7 @@ class MenuDishesController extends Controller
     {
         $services = new MenusDishesService();
         //$result = $services->CalculateMenuInfo($request['menu_id']);
-        $result = $services->get_bju_dish(19, 'protein');
+        $result = $services->CalculateMenuInfo(10);
 
         return $result;
     }
