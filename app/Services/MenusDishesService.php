@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Dishes;
 use App\Models\DishesProducts;
+use App\Models\Menu;
 use App\Models\MenuDishes;
 use App\Models\Products;
 
@@ -45,6 +46,17 @@ class MenusDishesService
     }
 
     public function CalculateMenuInfo($id){
-        return $id;
+        $result = [];
+        $menu = Menu::where('id', $id)->with('nutritions', 'days')->first();
+        foreach ($menu->days as $m_day){
+            foreach($menu->nutritions as $m_nutrition){
+                $menu_dishes = MenuDishes::where('menu_id', $menu->id)->where('days_id', $m_day->id)->where('nutrition_id', $m_nutrition->id)->get();
+                foreach ($menu_dishes as $m_dish){
+                    $result[$m_day->id][$m_nutrition->id][$m_dish->id] = Dishes::where('id', $m_dish->dishes_id)->first()->name;
+                }
+
+            }
+        }
+        return response()->json($result);
     }
 }
