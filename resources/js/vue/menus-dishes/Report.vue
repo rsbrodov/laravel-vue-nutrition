@@ -18,45 +18,82 @@
         </form>
 
         <div class="container mt-4 mb-4" v-if="post">
-            <div class="container">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Название блюда</th>
-                        <th scope="col" class="text-center">Масса блюда</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-<!--                    <tr v-for="(mDish, index) in menusDishes" :key="index" >-->
-<!--                        <td>{{mDish.id}}</td>-->
-<!--                        <td>{{mDish.dishes.name}}</td>-->
-<!--                        <td>{{mDish.yield}}</td>-->
-<!--                    </tr>-->
-                    </tbody>
-                </table>
+            <div class="container days" v-for="(day, index) in post" :key="index">
+                <p><b>{{day.day_name}}</b></p>
+                <div class="nutritions" v-for="(nutrition, index) in day.nutrition" :key="index">
+                    <p><b>{{nutrition.nutrition_name}}</b></p>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col" rowspan="2">№ рецептуры</th>
+                            <th scope="col" rowspan="2">Название блюда</th>
+                            <th scope="col" rowspan="2">Выход</th>
+                            <th scope="col" rowspan="2">Белки</th>
+                            <th scope="col" rowspan="2">Жиры</th>
+                            <th scope="col" rowspan="2">Углеводы</th>
+                            <th scope="col" rowspan="2">Эн. ценность</th>
+                            <th scope="col" colspan="5">Витамины</th>
+                            <th scope="col" colspan="6">Минеральные вещества</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">B1, мг</th>
+                            <th scope="col">B2, мг</th>
+                            <th scope="col">A, мг</th>
+                            <th scope="col">D, мг</th>
+                            <th scope="col">C, мг</th>
+                            <th scope="col">Na, мг</th>
+                            <th scope="col">K, мг</th>
+                            <th scope="col">Mg, мг</th>
+                            <th scope="col">P, мг</th>
+                            <th scope="col">I, мг</th>
+                            <th scope="col">Se, мг</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(dish, index) in nutrition.dish" :key="index">
+                                <td>{{dish.techmap_number}}</td>
+                                <td>{{dish.name}}</td>
+                                <td>{{dish.yield}}</td>
+                                <td>{{dish.protein}}</td>
+                                <td>{{dish.fat}}</td>
+                                <td>{{dish.carbohydrates_total}}</td>
+                                <td>{{dish.kkal}}</td>
+                                <td>{{dish.vitamin_b1}}</td>
+                                <td>{{dish.vitamin_b2}}</td>
+                                <td>{{dish.vitamin_a}}</td>
+                                <td>{{dish.vitamin_d}}</td>
+                                <td>{{dish.vitamin_c}}</td>
+                                <td>{{dish.na}}</td>
+                                <td>{{dish.k}}</td>
+                                <td>{{dish.mg}}</td>
+                                <td>{{dish.p}}</td>
+                                <td>{{dish.i}}</td>
+                                <td>{{dish.se}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        {{post}}
     </div>
 </template>
 
 <script>
     import {mapGetters, mapActions} from 'vuex'
 
-    export default{
-        data:function(){
+    export default {
+        data: function () {
             return {
-                post:null,
-                form:{
+                post: null,
+                form: {
                     menu_id: null,
                 }
             }
         },
         computed: mapGetters(['allMenus']),
-        methods:{
+        methods: {
             ...mapActions(['getMenus']),
-            getReport(){
+            getReport() {
                 axios.post('api/menus-dishes/report', this.form)
                     .then(response => {
                         this.post = response.data;
@@ -67,7 +104,7 @@
             },
         },
 
-        async created(){
+        async created() {
             this.getMenus();
         },
     }
