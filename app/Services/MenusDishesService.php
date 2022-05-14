@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use App\Models\Day;
 use App\Models\Dishes;
 use App\Models\DishesProducts;
 use App\Models\Menu;
 use App\Models\MenuDishes;
+use App\Models\Nutrition;
 use App\Models\Products;
 
 class MenusDishesService
@@ -78,15 +80,17 @@ class MenusDishesService
                 $menu_dishes = MenuDishes::where('menu_id', $menu->id)->where('days_id', $m_day->id)->where('nutrition_id', $m_nutrition->id)->get();
                 foreach ($menu_dishes as $m_dish){
                     $dishes = Dishes::where('id', $m_dish->dishes_id)->first();
-                    $result[$m_day->id][$m_nutrition->id][$m_dish->id]['name'] = $dishes->name;
-                    $result[$m_day->id][$m_nutrition->id][$m_dish->id]['techmap_number'] = $dishes->techmap_number;
-                    $result[$m_day->id][$m_nutrition->id][$m_dish->id]['yield'] = $dishes->yield;
-                    $result[$m_day->id][$m_nutrition->id][$m_dish->id]['protein'] = $this->get_bju_dish($m_dish->id, 'protein');
-                    $result[$m_day->id][$m_nutrition->id][$m_dish->id]['fat'] = $this->get_bju_dish($m_dish->id, 'fat');
-                    $result[$m_day->id][$m_nutrition->id][$m_dish->id]['carbohydrates_total'] = $this->get_bju_dish($m_dish->id, 'carbohydrates_total');
-                    $result[$m_day->id][$m_nutrition->id][$m_dish->id]['kkal'] = $this->get_kkal_dish($m_dish->id);
-                    $result[$m_day->id][$m_nutrition->id][$m_dish->id]['vitamin_b1'] = $this->get_vitamin($m_dish->id, $m_dish->yield, 'vitamin_b1');
-                    $result[$m_day->id][$m_nutrition->id][$m_dish->id]['vitamin_a'] = $this->get_vitamin($m_dish->id, $m_dish->yield, 'vitamin_a');
+                    $result[$m_dish->days_id]['day_name'] = Day::where('id', $m_dish->days_id)->first()->name;
+                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['nutrition_name'] = Nutrition::where('id', $m_dish->nutrition_id)->first()->name;
+                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['name'] = $dishes->name;
+                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['techmap_number'] = $dishes->techmap_number;
+                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['yield'] = $dishes->yield;
+                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['protein'] = $this->get_bju_dish($m_dish->id, 'protein');
+                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['fat'] = $this->get_bju_dish($m_dish->id, 'fat');
+                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['carbohydrates_total'] = $this->get_bju_dish($m_dish->id, 'carbohydrates_total');
+                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['kkal'] = $this->get_kkal_dish($m_dish->id);
+                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['vitamin_b1'] = $this->get_vitamin($m_dish->id, $m_dish->yield, 'vitamin_b1');
+                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['vitamin_a'] = $this->get_vitamin($m_dish->id, $m_dish->yield, 'vitamin_a');
                 }
 
             }
