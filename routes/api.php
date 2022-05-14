@@ -84,3 +84,4 @@ Route::post('menus-dishes/report', [MenuDishesController::class, 'getReport']);
 Route::get('menus-dishes/days/{id}', [MenuDishesController::class, 'getDays']);
 Route::post('/menus-dishes/store', [MenuDishesController::class, 'store']);
 Route::post('/menus-dishes/index', [MenuDishesController::class, 'index']);
+Route::delete('/menus-dishes/{id}', [MenuDishesController::class, 'destroy']);

@@ -93,9 +93,14 @@ class MenuDishesController extends Controller
      * @param  \App\Models\MenuDishes  $menuDishes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MenuDishes $menuDishes)
+    public function destroy($id)
     {
-        //
+        $existing_item = MenuDishes::find($id);
+        if($existing_item){
+            $existing_item->delete();
+            return 'Item saccessufuly delete';
+        }
+        return 'Item not found';
     }
 
     public function getNutritions($id)
