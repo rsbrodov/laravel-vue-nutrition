@@ -120,9 +120,10 @@ class MenuDishesController extends Controller
 
     public function getReport(Request $request)
     {
+        //return $request['menu_id'];
         $services = new MenusDishesService();
         //$result = $services->CalculateMenuInfo($request['menu_id']);
-        $result = $services->CalculateMenuInfo(10);
+        $result = $services->CalculateMenuInfo($request['menu_id']);
 
         return $result;
     }

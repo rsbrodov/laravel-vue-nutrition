@@ -39,7 +39,7 @@ class MenusDishesService
             $value = $this->get_products_bju($d_product->products_id, $m_dishes->dishes_id, $field) * ($d_product->net_weight/100) *($m_dishes->yield / $dishes->yield);/**/
             $total = $total + $value;
         }
-        return $total;
+        return round($total, 1);
     }
 
     public function get_kkal($products_id, $menus_dishes_id){
@@ -52,7 +52,7 @@ class MenusDishesService
         else{
             $kkal = ($product->protein * 4) + ($product->fat * 9) + ($product->carbohydrates_total * 4);
         }
-        return $kkal;
+        return round($kkal, 1);
     }
 
     public function get_kkal_dish($menus_dishes_id){//за блюдо
@@ -64,7 +64,7 @@ class MenusDishesService
             $kkal = $this->get_kkal($d_product->products_id, $m_dishes->id) * ($d_product->net_weight/100) *($m_dishes->yield / $dishes->yield);/**/
             $total = $total + $kkal;
         }
-        return $total;
+        return round($total, 1);
     }
 
     public function CalculateMenuInfo($id){
@@ -84,10 +84,11 @@ class MenusDishesService
                     $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['fat'] = $this->get_bju_dish($m_dish->id, 'fat');
                     $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['carbohydrates_total'] = $this->get_bju_dish($m_dish->id, 'carbohydrates_total');
                     $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['kkal'] = $this->get_kkal_dish($m_dish->id);
-                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['vitamin_b1'] = $this->get_vitamin($m_dish->id, $m_dish->yield, 'vitamin_b1');
-                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['vitamin_a'] = $this->get_vitamin($m_dish->id, $m_dish->yield, 'vitamin_a');
-                }
+                    foreach($this->getVitaminList() as $vitamin){
+                        $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id][$vitamin] = $this->get_vitamin($m_dish->id, $m_dish->yield, $vitamin);
 
+                    }
+                }
             }
         }
         return response()->json($result);
@@ -116,6 +117,6 @@ class MenusDishesService
             $sum = 0;
         }
 
-        return $sum;
+        return round($sum, 2);
     }
 }
