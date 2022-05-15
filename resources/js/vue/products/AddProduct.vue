@@ -239,6 +239,13 @@ export default{
             }else{
                 this.getNewProduct({
                     form: this.form
+                })
+                .then(response => {
+                    this.flashMessage.success({
+                        title: 'Данные сохранены',
+                        message: 'Продукт добавлен в список',
+                        time: 3000,
+                    });
                 });
                 this.$bvModal.hide('modal-1')
 

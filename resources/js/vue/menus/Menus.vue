@@ -1,57 +1,62 @@
 <template>
-  <div style="width:90%; margin: 0 auto;">
+    <div style="width:90%; margin: 0 auto;">
+        <FlashMessage :position="'right top'"></FlashMessage>
+        <h1 class="text-center">Список меню</h1>
+        <b-button v-b-modal.modal-1 variant="success" class="mb-4">Создать новое меню</b-button>
+        <b-modal id="modal-1" class="mb-4" size="lg" title="Добавление нового продукта">
+            <addMenu/>
+        </b-modal>
 
-    <h1 class="text-center">Список меню</h1>
-      <b-button v-b-modal.modal-1 variant="success" class="mb-4">Создать новое меню</b-button>
-      <b-modal id="modal-1" class="mb-4" size="lg" title="Добавление нового продукта" >
-          <addMenu/>
-      </b-modal>
-
-    <div class="row mt-4 mb-4">
-        <div class="header-block row">
-            <div class="search-form col-8">
-                <div class="form">
-                    <form action="" method="post">
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <input autocomplete="off" type="text" name="id" placeholder="id" class="form-control" v-model.integer="filter_form.id">
+        <div class="row mt-4 mb-4">
+            <div class="header-block row">
+                <div class="search-form col-8">
+                    <div class="form">
+                        <form action="" method="post">
+                            <div class="form-group row">
+                                <div class="col-4">
+                                    <input autocomplete="off" type="text" name="id" placeholder="id"
+                                           class="form-control" v-model.integer="filter_form.id">
+                                </div>
+                                <div class="col-4">
+                                    <input autocomplete="off" type="text" name="name" placeholder="Название меню"
+                                           class="form-control" v-model="filter_form.name">
+                                </div>
+                                <div class="col-4">
+                                    <input autocomplete="off" type="text" name="date" placeholder="Дата создание(после)"
+                                           class="form-control" v-model="filter_form.date">
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <input autocomplete="off" type="text" name="name" placeholder="Название меню" class="form-control" v-model="filter_form.name">
-                            </div>
-                            <div class="col-4">
-                                <input autocomplete="off" type="text" name="date" placeholder="Дата создание(после)" class="form-control" v-model="filter_form.date">
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Название</th>
+                <th scope="col" class="text-center">Приемы пищи</th>
+                <th scope="col" class="text-center">Дни</th>
+                <th scope="col" class="text-center">Дата создания</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(myMenu, index) in filteredMenus" :key="index">
+                <td>{{myMenu.id}}</td>
+                <td>{{myMenu.name}}</td>
+                <td>{{myMenu.nutritions | nutrition_separator }}</td>
+                <td>{{myMenu.days | day_separator }}</td>
+                <td>{{myMenu | dateCreated }}</td>
+                <td class="text-center">
+                    <b-button variant="danger" @click="removeMenus(myMenu.id)">
+                        <font-awesome-icon icon="trash"/>
+                    </b-button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <table class="table table-bordered">
-      <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Название</th>
-        <th scope="col" class="text-center">Приемы пищи</th>
-        <th scope="col" class="text-center">Дни</th>
-        <th scope="col" class="text-center">Дата создания</th>
-      </tr>
-    </thead>
-    <tbody>
-          <tr v-for="(myMenu, index) in filteredMenus" :key="index" >
-              <td>{{myMenu.id}}</td>
-              <td>{{myMenu.name}}</td>
-              <td>{{myMenu.nutritions | nutrition_separator }}</td>
-              <td>{{myMenu.days | day_separator }}</td>
-              <td>{{myMenu | dateCreated }}</td>
-              <td class="text-center"><b-button variant="danger" @click="removeMenus(myMenu.id)">
-                  <font-awesome-icon icon="trash"/>
-              </b-button></td>
-          </tr>
-  </tbody>
-</table>
-</div>
 </template>
 
 <script>
@@ -89,6 +94,12 @@ export default{
         ...mapActions(['getMenus', 'deleteMenu']),
         removeMenus(id){
             this.deleteMenu(id)
+                .then(response => {
+                    this.flashMessage.success({
+                        message: 'Меню успешно удалено',
+                        time: 3000,
+                    });
+                });
         },
     },
     filters: {

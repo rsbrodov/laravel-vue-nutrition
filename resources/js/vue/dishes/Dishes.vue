@@ -1,5 +1,6 @@
 <template>
     <div style="width:90%; margin: 0 auto;">
+        <FlashMessage :position="'right top'"></FlashMessage>
         <h1 class="text-center">Разработка блюд</h1>
         <b-button v-b-modal.modal-1 variant="success" class="mb-4">Создать новое блюдо</b-button>
         <!--Modal window for create new Dish-->
