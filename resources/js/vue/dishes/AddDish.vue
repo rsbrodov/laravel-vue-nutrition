@@ -139,7 +139,13 @@ export default{
             }else {
                 this.newDish({
                     form: this.form
-                });
+                })
+                    .then(response => {
+                        this.flashMessage.success({
+                            message: 'Блюдо успешно создано',
+                            time: 3000,
+                        });
+                    });
                 this.$emit('close-modal');
             }
         },

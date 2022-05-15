@@ -93,6 +93,11 @@ export default{
             }else{
                 this.getNewMenu({
                     form: this.form
+                }).then(response => {
+                    this.flashMessage.success({
+                        message: 'Меню успешно создано',
+                        time: 3000,
+                    });
                 });
                 this.$bvModal.hide('modal-1')
 

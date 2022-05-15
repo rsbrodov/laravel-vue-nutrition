@@ -1,6 +1,6 @@
 <template>
   <div style="width:90%; margin: 0 auto;">
-
+      <FlashMessage :position="'right top'"></FlashMessage>
     <h1 class="text-center">Список продуктов</h1>
       <b-button v-b-modal.modal-1 variant="success" class="mb-4">Создать новый продукт</b-button>
       <b-modal id="modal-1" class="mb-4" size="lg" title="Добавление нового продукта" >
@@ -43,8 +43,6 @@
 <script>
 import addProduct from './AddProduct'
 import {mapGetters, mapActions} from 'vuex'
-import {VueSuggestion} from 'vue-suggestion'
-import 'vue-suggestion/dist/vue-suggestion.css'
 
 export default{
     components:{addProduct},
@@ -57,6 +55,12 @@ export default{
         ...mapActions(['getProducts', 'deleteProduct']),
         removeProducts(id){
             this.deleteProduct(id)
+                .then(response => {
+                    this.flashMessage.success({
+                        message: 'Продукт успешно удален',
+                        time: 3000,
+                    });
+                });
         }
 
     },
