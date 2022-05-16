@@ -79,7 +79,7 @@ class MenusDishesService
                     $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['nutrition_name'] = Nutrition::where('id', $m_dish->nutrition_id)->first()->name;
                     $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['name'] = $dishes->name;
                     $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['techmap_number'] = $dishes->techmap_number;
-                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['yield'] = $dishes->yield;
+                    $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['yield'] = $m_dish->yield;
                     $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['protein'] = $this->get_bju_dish($m_dish->id, 'protein');
                     $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['fat'] = $this->get_bju_dish($m_dish->id, 'fat');
                     $result[$m_dish->days_id]['nutrition'][$m_dish->nutrition_id]['dish'][$m_dish->id]['carbohydrates_total'] = $this->get_bju_dish($m_dish->id, 'carbohydrates_total');

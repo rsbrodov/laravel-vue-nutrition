@@ -1,6 +1,6 @@
 <template>
   <div style="width:90%; margin: 0 auto;">
-      <FlashMessage :position="'right top'"></FlashMessage>
+      <FlashMessage :position="'right top'" style="margin-top: 100px;"></FlashMessage>
     <h1 class="text-center">Список продуктов</h1>
       <b-button v-b-modal.modal-1 variant="success" class="mb-4">Создать новый продукт</b-button>
       <b-modal id="modal-1" class="mb-4" size="lg" title="Добавление нового продукта" >

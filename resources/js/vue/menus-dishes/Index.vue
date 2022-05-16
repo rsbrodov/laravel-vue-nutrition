@@ -1,89 +1,91 @@
 <template>
-  <div style="width:80%; margin: 0 auto;">
+    <div style="width:80%; margin: 0 auto;">
+        <FlashMessage :position="'right top'"></FlashMessage>
+        <h1 class="text-center">Работа с меню</h1>
+        <form @submit.prevent="menusDishesIndex()">
+            <div class="row">
+                <div class="col-4">
+                    <label for="menu_id"><b>Меню</b></label>
+                    <select id="menu_id" class="form-control" @change="setFirstMenu" v-model="form.menu_id">
+                        <option value="null" disabled selected hidden>Выберите меню...</option>
+                        <option v-for="(menu, index) in allMenus" :key="index" :value="menu.id">
+                            {{menu.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="day_id"><b>Дни</b></label>
+                    <select id="day_id" class="form-control" v-model="form.day_id">
+                        <option v-for="(day, index) in days" :key="index" :value="index">
+                            {{day}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="nutrition_id"><b>Приемы пищи</b></label>
+                    <select id="nutrition_id" class="form-control" v-model="form.nutrition_id">
+                        <option v-for="(nutrition, index) in nutritions" :key="index" :value="index">
+                            {{nutrition}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="blocks mt-3 text-center">
+                <button class="btn btn-success" style="width:100%">Посмотреть</button>
+            </div>
+        </form>
 
-    <h1 class="text-center">Работа с меню</h1>
-      <form @submit.prevent="menusDishesIndex()">
-          <div class="row">
-              <div class="col-4">
-                  <label for="menu_id"><b>Меню</b></label>
-                  <select id="menu_id" class="form-control" @change="setFirstMenu" v-model="form.menu_id">
-                      <option value="null" disabled selected hidden>Выберите меню...</option>
-                      <option v-for="(menu, index) in allMenus" :key="index" :value="menu.id">
-                          {{menu.name}}
-                      </option>
-                  </select>
-              </div>
-              <div class="col-4">
-                  <label for="day_id"><b>Дни</b></label>
-                  <select id="day_id" class="form-control" v-model="form.day_id">
-                      <option v-for="(day, index) in days" :key="index" :value="index">
-                          {{day}}
-                      </option>
-                  </select>
-              </div>
-              <div class="col-4">
-                  <label for="nutrition_id"><b>Приемы пищи</b></label>
-                  <select id="nutrition_id" class="form-control" v-model="form.nutrition_id">
-                      <option v-for="(nutrition, index) in nutritions" :key="index" :value="index">
-                          {{nutrition}}
-                      </option>
-                  </select>
-              </div>
-          </div>
-          <div class="blocks mt-3 text-center">
-              <button class="btn btn-success" style="width:100%">Посмотреть</button>
-          </div>
-      </form>
 
-
-      <div class="container mt-5 mb-2" v-if="post">
-          <div class="container">
-              <p class="text-center" style="font-size: 20px;">Блюда в меню</p>
-              <table class="table table-bordered">
-                  <thead>
-                  <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Название блюда</th>
-                      <th scope="col" class="text-center">Масса блюда</th>
-                      <th scope="col" class="text-center">Управление</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr v-if="menusDishes.length === 0">
-                      <td class="text-center text-danger" colspan="3"><b>Блюда в меню не добавлены</b></td>
-                  </tr>
-                  <tr v-else v-for="(mDish, index) in menusDishes" :key="index" >
-                      <td>{{mDish.id}}</td>
-                      <td>{{mDish.dishes.name}}</td>
-                      <td>{{mDish.yield}}</td>
-                      <td class="text-center"><b-button variant="danger" @click="removeMenuDishes(mDish.id)">
-                          <font-awesome-icon icon="trash"/>
-                      </b-button></td>
-                  </tr>
-                  </tbody>
-              </table>
-          </div>
-          <form @submit.prevent="menusDishesStore()">
-              <div class="row">
-                  <div class="col-4">
-                      <label for="dishes_id"><b>Блюдо</b></label>
-                      <select id="dishes_id" class="form-control" v-model="form.dishes_id">
-                          <option v-for="(dish, index) in myDishes" :key="index" :value="dish.id">
-                              {{dish.name}}
-                          </option>
-                      </select>
-                  </div>
-                  <div class="col-4">
-                      <label for="yield"><b>Выход в граммах</b></label>
-                      <input id="yield" class="form-control" type="text" v-model="form.yield" autocomplete="off">
-                  </div>
-                  <div class="col-4">
-                      <button class="btn btn-success mt-4 justify-content-center">Добавить в меню</button>
-                  </div>
-              </div>
-          </form>
-      </div>
-</div>
+        <div class="container mt-5 mb-2" v-if="post">
+            <div class="container">
+                <p class="text-center" style="font-size: 20px;">Блюда в меню</p>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Название блюда</th>
+                        <th scope="col" class="text-center">Масса блюда</th>
+                        <th scope="col" class="text-center">Управление</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-if="menusDishes.length === 0">
+                        <td class="text-center text-danger" colspan="3"><b>Блюда в меню не добавлены</b></td>
+                    </tr>
+                    <tr v-else v-for="(mDish, index) in menusDishes" :key="index">
+                        <td>{{mDish.id}}</td>
+                        <td>{{mDish.dishes.name}}</td>
+                        <td>{{mDish.yield}}</td>
+                        <td class="text-center">
+                            <b-button variant="danger" @click="removeMenuDishes(mDish.id)">
+                                <font-awesome-icon icon="trash"/>
+                            </b-button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <form @submit.prevent="menusDishesStore()">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="dishes_id"><b>Блюдо</b></label>
+                        <select id="dishes_id" class="form-control" v-model="form.dishes_id">
+                            <option v-for="(dish, index) in myDishes" :key="index" :value="dish.id">
+                                {{dish.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <label for="yield"><b>Выход в граммах</b></label>
+                        <input id="yield" class="form-control" type="text" v-model="form.yield" autocomplete="off">
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-success mt-4 justify-content-center">Добавить в меню</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </template>
 
 <script>

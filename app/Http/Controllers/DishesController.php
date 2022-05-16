@@ -42,7 +42,7 @@ class DishesController extends Controller
     {
         $new_dish = New Dishes();
         $new_dish->name = $request->form['name'];
-        $new_dish->dishes_categories_id = 1;
+        $new_dish->dishes_categories_id = $request->form['dishes_categories_id'];;
         $new_dish->recipes_collections_id = $request->form['recipes_collections_id'];
         $new_dish->description = $request->form['description'];
         $new_dish->culinary_processings_id = $request->form['culinary_processings_id'];
