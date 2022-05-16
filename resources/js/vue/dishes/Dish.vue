@@ -30,8 +30,13 @@ export default{
     methods:{
          ...mapActions(['deleteDish', 'copyDish']),
         removeDish(){
-            console.log(this.dish.id)
-            this.deleteDish(this.dish.id);
+            this.deleteDish(this.dish.id)
+                .then(response => {
+                    this.flashMessage.success({
+                        message: 'Блюдо успешно удалено',
+                        time: 3000,
+                    });
+                });
         },
         copyDishClick(){
             this.copyDish(this.dish.id);

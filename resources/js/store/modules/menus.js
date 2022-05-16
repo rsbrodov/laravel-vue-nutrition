@@ -70,5 +70,9 @@ export default{
             const menus_dishes = await axios.post('api/menus-dishes/index/', form);
             ctx.commit('updateMenusDishes', menus_dishes.data)
         },
+        async deleteMenuDishes(ctx, id){
+            await axios.delete('api/menus-dishes/'+id);
+            ctx.commit('updateMenusDishes', menus_dishes.data)
+        },
     },
 }

@@ -7,6 +7,7 @@
               <div class="col-4">
                   <label for="menu_id"><b>Меню</b></label>
                   <select id="menu_id" class="form-control" @change="setFirstMenu" v-model="form.menu_id">
+                      <option value="null" disabled selected hidden>Выберите меню...</option>
                       <option v-for="(menu, index) in allMenus" :key="index" :value="menu.id">
                           {{menu.name}}
                       </option>
@@ -29,26 +30,35 @@
                   </select>
               </div>
           </div>
-          <button class="btn btn-success mt-4 justify-content-center">Посмотреть</button>
+          <div class="blocks mt-3 text-center">
+              <button class="btn btn-success" style="width:100%">Посмотреть</button>
+          </div>
       </form>
 
 
-
-      <div class="container mt-4 mb-4" v-if="post">
+      <div class="container mt-5 mb-2" v-if="post">
           <div class="container">
+              <p class="text-center" style="font-size: 20px;">Блюда в меню</p>
               <table class="table table-bordered">
                   <thead>
                   <tr>
                       <th scope="col">ID</th>
                       <th scope="col">Название блюда</th>
                       <th scope="col" class="text-center">Масса блюда</th>
+                      <th scope="col" class="text-center">Управление</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr v-for="(mDish, index) in menusDishes" :key="index" >
+                  <tr v-if="menusDishes.length === 0">
+                      <td class="text-center text-danger" colspan="3"><b>Блюда в меню не добавлены</b></td>
+                  </tr>
+                  <tr v-else v-for="(mDish, index) in menusDishes" :key="index" >
                       <td>{{mDish.id}}</td>
                       <td>{{mDish.dishes.name}}</td>
                       <td>{{mDish.yield}}</td>
+                      <td class="text-center"><b-button variant="danger" @click="removeMenuDishes(mDish.id)">
+                          <font-awesome-icon icon="trash"/>
+                      </b-button></td>
                   </tr>
                   </tbody>
               </table>
@@ -73,18 +83,15 @@
               </div>
           </form>
       </div>
-      {{form}}
 </div>
 </template>
 
 <script>
-//import addMenu from './AddMenu'
 import {mapGetters, mapActions} from 'vuex'
 import {VueSuggestion} from 'vue-suggestion'
 import 'vue-suggestion/dist/vue-suggestion.css'
 
 export default{
-    //components:{addMenu},
     data:function(){
         return {
             post:null,
@@ -101,7 +108,7 @@ export default{
     },
     computed: mapGetters(['myDishes','allMenus', 'menusDishes']),
     methods:{
-        ...mapActions(['getMyDishes', 'getMenus', 'getNewMenuDishes', 'getMenusDishes']),
+        ...mapActions(['getMyDishes', 'getMenus', 'getNewMenuDishes', 'getMenusDishes', 'deleteMenuDishes']),
         menusDishesIndex(){
             this.getMyDishes();
             this.post = this.form.day_id;
@@ -114,17 +121,6 @@ export default{
 
         },
         setFirstMenu(){
-            if(this.form.menu_id === null){
-                axios.get('api/menus/first-menu/')
-                    .then(response => {
-                        this.form.menu_id = response.data.id;
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            }
-
-
             axios.get('api/menus-dishes/nutritions/' + this.form.menu_id)
                 .then(response => {
                     this.nutritions = response.data;
@@ -150,14 +146,17 @@ export default{
                 form: this.form
             })
             .then(response => {
-                console.log(response);
+                this.form.dishes_id = null;
+                this.form.yield = null;
             })
+        },
+        removeMenuDishes(id){
+            this.deleteMenuDishes(id)
         }
     },
 
     async created(){
         this.getMenus();
-        this.setFirstMenu();
     },
 }
 
