@@ -6,6 +6,8 @@ use App\Models\Dishes;
 use App\Models\DishesProducts;
 use App\Models\Menu;
 use App\Models\MenuDishes;
+use App\Models\MenuNutrition;
+use App\Models\Nutrition;
 use App\Models\Products;
 
 class MenusDishesService
@@ -73,8 +75,11 @@ class MenusDishesService
     public function CalculateMenuInfo($id){
         $result = [];
         $menu = Menu::where('id', $id)->with('nutritions', 'days')->first();
+        //return response()->json($menu->days);
         foreach ($menu->days as $m_day){
+            //$result[$m_day->id]['day'] = $m_day->id;
             foreach($menu->nutritions as $m_nutrition){
+                $result[$m_day->id][$m_nutrition->id]['nutrition'] = $m_nutrition->id;
                 $menu_dishes = MenuDishes::where('menu_id', $menu->id)->where('days_id', $m_day->id)->where('nutrition_id', $m_nutrition->id)->get();
                 foreach ($menu_dishes as $m_dish){
                     $dishes = Dishes::where('id', $m_dish->dishes_id)->first();
