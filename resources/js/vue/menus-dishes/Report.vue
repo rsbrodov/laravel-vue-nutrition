@@ -17,7 +17,7 @@
             </div>
         </form>
 
-        <div class="container mt-4 mb-4" v-if="post">
+        <div class="container mt-4 mb-4" v-if="post && getLoading === false">
             <div class="container days" v-for="(day, index) in post" :key="index">
                 <p><b>{{day.day_name}}</b></p>
                 <div class="nutritions" v-for="(nutrition, index) in day.nutrition" :key="index">
@@ -75,32 +75,42 @@
                 </div>
             </div>
         </div>
+        <div v-else-if="getLoading === true" class="text-center mt-5">
+            <Loader/>
+        </div>
     </div>
 </template>
 
 <script>
     import {mapGetters, mapActions} from 'vuex'
-
+    import Loader from "../helpers/Loader";
     export default {
+        components:{Loader},
         data: function () {
             return {
                 post: null,
                 form: {
                     menu_id: null,
-                }
+                },
+                getLoading: false,
             }
         },
         computed: mapGetters(['allMenus']),
         methods: {
             ...mapActions(['getMenus']),
             getReport() {
+                console.log(123);
+                this.getLoading = true;
                 axios.post('api/menus-dishes/report', this.form)
                     .then(response => {
                         this.post = response.data;
                     })
                     .catch(error => {
                         console.log(error);
-                    });
+                    })
+                    .finally(() => {
+                        this.getLoading = false;
+                });
             },
         },
 
