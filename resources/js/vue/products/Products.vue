@@ -21,20 +21,26 @@
       </tr>
     </thead>
     <tbody>
-          <tr v-for="(myProduct, index) in allProducts" :key="index">
-              <td>{{myProduct.id}}</td>
-              <td>{{myProduct.name}}</td>
-              <td>{{myProduct.products_categories.name}}</td>
-              <td>{{myProduct.protein}}</td>
-              <td>{{myProduct.fat}}</td>
-              <td>{{myProduct.carbohydrates_total}}</td>
-              <td>{{myProduct.vitamin_a}}</td>
-              <td>{{myProduct.vitamin_b1}}</td>
-              <td>{{myProduct.vitamin_b2}}</td>
-              <td class="text-center"><b-button variant="danger" @click="removeProducts(myProduct.id)">
-                  <font-awesome-icon icon="trash"/>
-              </b-button></td>
-          </tr>
+    <tr v-if="allProducts.length === 0 && getLoading === false">
+        <td class="text-center text-danger" colspan="10"><b>Данные не найдены!</b></td>
+    </tr>
+    <tr v-else-if="getLoading === true" style="border:none">
+        <td class="text-center text-danger" colspan="10"><Loader/></td>
+    </tr>
+    <tr v-else v-for="(myProduct, index) in allProducts" :key="index">
+        <td>{{myProduct.id}}</td>
+        <td>{{myProduct.name}}</td>
+        <td>{{myProduct.products_categories.name}}</td>
+        <td>{{myProduct.protein}}</td>
+        <td>{{myProduct.fat}}</td>
+        <td>{{myProduct.carbohydrates_total}}</td>
+        <td>{{myProduct.vitamin_a}}</td>
+        <td>{{myProduct.vitamin_b1}}</td>
+        <td>{{myProduct.vitamin_b2}}</td>
+        <td class="text-center"><b-button variant="danger" @click="removeProducts(myProduct.id)">
+            <font-awesome-icon icon="trash"/>
+        </b-button></td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -42,15 +48,16 @@
 
 <script>
 import addProduct from './AddProduct'
+import Loader from "../helpers/Loader";
 import {mapGetters, mapActions} from 'vuex'
 
 export default{
-    components:{addProduct},
+    components:{addProduct, Loader},
     data:function(){
         return {
         }
     },
-    computed: mapGetters(['allProducts']),
+    computed: mapGetters(['allProducts', 'getLoading']),
     methods:{
         ...mapActions(['getProducts', 'deleteProduct']),
         removeProducts(id){
@@ -65,7 +72,7 @@ export default{
 
     },
 
-    async created(){
+    async mounted(){
         this.getProducts()
     },
 }
