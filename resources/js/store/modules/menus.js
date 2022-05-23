@@ -41,13 +41,13 @@ export default{
         },
     },
     actions: {
-        async getMenus(ctx){
+        async getMenus({commit}){
             const menus = await axios.get('api/menus/');
-            ctx.commit('updateMenus', menus.data)
+            commit('updateMenus', menus.data)
         },
-        async getFirstMenu(ctx){
+        async getFirstMenu({commit}){
             const first_menu = await axios.get('api/menus/first-menu/');
-            ctx.commit('firstMenu', first_menu.data)
+            commit('firstMenu', first_menu.data)
         },
         async getNewMenu(ctx, form){
             const new_menu = await axios.post('api/menus/store', form);

@@ -27,12 +27,21 @@ export default{
         },
     },
     actions: {
-        async getProducts(ctx){
-            const products = await axios.get('api/products/')
-            ctx.commit('updateProducts', products.data)
+        async getProducts({commit}){
+            commit('setLoading', true);
+            await axios.get('api/products/')
+            .then(response => {
+                commit('updateProducts', response.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+            .finally(() => {
+                commit('setLoading', false);
+            });
         },
         async getNewProduct(ctx, form){
-            const new_dish = await axios.post('api/products/store', form)
+            const new_dish = await axios.post('api/products/store', form);
             ctx.commit('addingProduct', new_dish.data)
             const products = await axios.get('api/products/')
             ctx.commit('updateProducts', products.data)

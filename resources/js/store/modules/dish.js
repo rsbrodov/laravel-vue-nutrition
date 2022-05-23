@@ -60,9 +60,18 @@ export default{
             const dishes_categories = await axios.get('api/dishes/dishes-categories');
             ctx.commit('updateDishesCategories', dishes_categories.data)
         },
-        async getMyDishes(ctx){
-            const my_dishes = await axios.get('api/dishes/')
-            ctx.commit('updateMyDishes', my_dishes.data)
+        async getMyDishes({commit}){
+            commit('setLoading', true);
+            await axios.get('api/dishes/')
+            .then(response => {
+                 commit('updateMyDishes', response.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+            .finally(() => {
+                commit('setLoading', false);
+            });
         },
         async getMyRecipesCollections(ctx){
             const my_recipes_collections = await axios.get('api/dishes/recipes-collections');

@@ -14,7 +14,10 @@
             />
         </b-modal>
 
-        <table class="table table-bordered">
+        <div v-if="getLoading === true" class="text-center mt-5">
+            <Loader/>
+        </div>
+        <table v-else class="table table-bordered">
             <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -39,19 +42,20 @@
 <script>
     import addDish from './AddDish'
     import Dish from './Dish'
+    import Loader from "../helpers/Loader";
     import {mapGetters, mapActions} from 'vuex'
     import {VueSuggestion} from 'vue-suggestion'
     import 'vue-suggestion/dist/vue-suggestion.css'
     import AddProductToDish from "./AddProductToDish";
 
     export default {
-        components: {addDish, Dish, VueSuggestion, AddProductToDish},
+        components: {Loader, addDish, Dish, VueSuggestion, AddProductToDish},
         data: function () {
             return {
                 id: null,
             }
         },
-        computed: mapGetters(['myDishes']),
+        computed: mapGetters(['myDishes', 'getLoading']),
         methods: {
             ...mapActions(['getMyDishes']),
             addProductsDish(e) {
