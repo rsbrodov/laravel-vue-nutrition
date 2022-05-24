@@ -9,13 +9,7 @@
 </head>
 <body>
 <div id="app">
-    <v-header></v-header>
-    <main style="margin-top: 20px;">
-        <div class="uk-container">
-            <router-view></router-view>
-        </div>
-    </main>
-    <v-footer></v-footer>
+    <app></app>
 </div>
 <script src="/js/app.js"></script>
 </body>
