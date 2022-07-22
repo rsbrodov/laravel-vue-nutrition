@@ -11,12 +11,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import FlashMessage from '@smartweb/vue-flash-message';
 
 
-
 import store from './store/index'
 import Moment from 'vue-moment';
-Vue.component('v-header', require('./Headers.vue').default);
-Vue.component('v-footer', require('./Footer.vue').default);
-
+Vue.component('app', require('./App.vue').default);
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"

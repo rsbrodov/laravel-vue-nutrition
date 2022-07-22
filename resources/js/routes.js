@@ -2,9 +2,6 @@ import VueRouter from "vue-router";
 import Vue from 'vue';
 Vue.use(VueRouter);
 
-import App from './vue/todolist/app'
-import Chat from './vue/chat/chat'
-import Register from './vue/auth/Register'
 import Login from './vue/auth/Login'
 import Cabinet from './vue/auth/Cabinet'
 import ChatVuex from './vue/chat/chatVuex'
@@ -22,72 +19,88 @@ const router = new VueRouter({
     mode:'history',
     routes:[
         {
-            path:'/todolist',
-            component: App,
-        },
-        {
-            path:"/chat",
-            component: Chat
-        },
-        {
-            path:"/register",
-            component: Register,
-            name: 'register'
-
-        },
-        {
             path:"/login",
             component: Login,
-            name: 'login'
+            name: 'login',
+            meta: {
+                layout: 'Guest'
+            }
 
         },
         {
             path:"/cabinet",
             component: Cabinet,
-            name: 'cabinet'
+            name: 'cabinet',
+            meta: {
+                layout: 'Auth'
+            }
 
         },
         {
             path:"/chat-vuex",
             component: ChatVuex,
+            meta: {
+                layout: 'Auth'
+            }
 
         },
         {
             path:"/dishes",
             component: Dishes,
-            name: 'dishes'
+            name: 'dishes',
+            meta: {
+                layout: 'Auth'
+            }
 
         },
         {
             path:"/dropdown",
             component: Dropdown,
+            meta: {
+                layout: 'Auth'
+            }
 
         },
         {
             path:"/test",
             component: Test,
+            meta: {
+                layout: 'Auth'
+            }
 
         },
         {
             path:"/products",
             component: Products,
-            name: 'products'
+            name: 'products',
+            meta: {
+                layout: 'Auth'
+            }
 
         },
         {
             path:"/menus-dishes",
             component: MenusDishes,
-            name: 'menus-dishes'
+            name: 'menus-dishes',
+            meta: {
+                layout: 'Auth'
+            }
         },
         {
             path:"/menus",
             component: Menus,
-            name: 'menus'
+            name: 'menus',
+            meta: {
+                layout: 'Auth'
+            }
         },
         {
             path:"/report",
             component: Report,
-            name: 'report'
+            name: 'report',
+            meta: {
+                layout: 'Auth'
+            }
         },
     ]
 });

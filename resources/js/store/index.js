@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 //import post from './modules/post';
+import loader from "./modules/loader";
 import dish from './modules/dish';
 import user from './modules/user';
 import products from './modules/products';
@@ -12,5 +13,5 @@ export default new Vuex.Store({
     //Вообще часто по логики эти методы оставляют тут но мы вынесем их в модуль, чтоб нам было проще, тк как функций может быть сотни
   /*state: {},getters: {}, mutations: {}, actions: {},*/
 
-  modules:{dish, user, products, menus}
+  modules:{loader, dish, user, products, menus}
 });
