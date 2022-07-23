@@ -27,6 +27,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Guest"
 });
@@ -147,6 +148,22 @@ var render = function () {
                       attrs: { to: { name: "login" } },
                     },
                     [_vm._v("Авторизация")]
+                  ),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { to: { name: "register" } },
+                    },
+                    [_vm._v("Регистрация")]
                   ),
                 ],
                 1
