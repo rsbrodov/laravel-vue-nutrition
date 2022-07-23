@@ -8,6 +8,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><router-link class="nav-link"  :to="{name: 'login'}">Авторизация</router-link></li>
+                    <li class="nav-item"><router-link class="nav-link"  :to="{name: 'register'}">Регистрация</router-link></li>
                 </ul>
             </div>
         </nav>

@@ -39,12 +39,19 @@
                                       class="helper-text invalid"
                                       v-else-if="$v.form.password.$dirty && !$v.form.password.minLength"
                                     >Пароль должен быть {{$v.form.password.$params.minLength.min}} символов. Сейчас он {{form.password.length}}</small>
+
+                                    <small
+                                    class="helper-text invalid"
+                                    v-if="errors"
+                                    >{{errors}}</small>
                                 </div>
                                 <div class="form-group mt-4">
                                     <button type="submit" class="form-control btn btn-primary rounded submit px-3">Войти</button>
                                 </div>
                             </form>
                         </div>
+                        <p>Логин: admin@mail.ru</p>
+                        <p>Пароль: 12345678</p>
                     </div>
                 </div>
             </div>
@@ -64,7 +71,7 @@ export default{
                 email:'',
                 password:'',
             },
-            errors:[],
+            errors:null,
         }
     },
     validations: {
@@ -86,11 +93,25 @@ export default{
                     localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN']);
                     this.$router.push({name:'cabinet'});
                 })
-                .catch(error =>{
-                    console.log(error.response);
-                })
+                .catch(response => {
+                        //if (error.response.status === 422) {
+                            this.errors = 'Вероятно, ошибка в логине или пароле.';
+                        //}
+                    });
             })
         }
     }
 }
 </script>
+<style>
+    select{
+        font-family: fontAwesome
+    }
+    .invalid {
+        border-color: red;
+        color: red;
+    }
+    small .invalid {
+        color: red;
+    }
+</style>

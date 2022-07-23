@@ -12,6 +12,7 @@ import Products from './vue/products/Products'
 import Menus from './vue/menus/Menus'
 import MenusDishes from './vue/menus-dishes/Index'
 import Report from './vue/menus-dishes/Report'
+import Register from './vue/auth/Register'
 
 
 const router = new VueRouter({
@@ -22,6 +23,15 @@ const router = new VueRouter({
             path:"/login",
             component: Login,
             name: 'login',
+            meta: {
+                layout: 'Guest'
+            }
+
+        },
+        {
+            path:"/register",
+            component: Register,
+            name: 'register',
             meta: {
                 layout: 'Guest'
             }
@@ -107,7 +117,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('x_xsrf_token');
     if(!token){
-        if(to.name === 'login'){
+        if(to.name === 'login' || to.name === 'register'){
             return next();
         }else{
             return next({name:"login"})
