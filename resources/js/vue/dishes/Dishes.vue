@@ -4,11 +4,14 @@
         <h1 class="text-center">Разработка блюд</h1>
         <b-button v-b-modal.modal-1 variant="success" class="mb-4">Создать новое блюдо</b-button>
         <!--Modal window for create new Dish-->
-        <b-modal id="modal-1" class="mb-4" size="lg" title="Добавление нового блюда">
+        <b-modal id="modal-1" class="mb-4" 
+          size="lg" 
+          title="Добавление нового блюда"
+          hide-footer="true">
             <addDish @close-modal="closeModal('dishCreate')"></addDish>
         </b-modal>
         <!--Modal window for adding products to dish-->
-        <b-modal id="modal-2" size="lg" title="Добавление продуктов в блюдо">
+        <b-modal id="modal-2" size="lg" hide-footer="true" title="Добавление продуктов в блюдо">
             <AddProductToDish
                 :dishes_id="id"
             />
@@ -73,37 +76,3 @@
     }
 
 </script>
-<style scope>
-  .vue-suggestion .vs__list {
-    width: 100%;
-    text-align: left;
-    border: none;
-    border-top: none;
-    max-height: 400px;
-    overflow-y: auto;
-    border-bottom: 1px solid #023d7b;
-    position: relative;
-  }
-  .vue-suggestion .vs__list .vs__list-item {
-    background-color: #fff;
-    padding: 10px;
-    border-left: 1px solid #023d7b;
-    border-right: 1px solid #023d7b;
-  }
-  .vue-suggestion .vs__list .vs__list-item:last-child {
-    border-bottom: none;
-  }
-  .vue-suggestion .vs__list .vs__list-item:hover {
-    background-color: #eee !important;
-  }
-  .vue-suggestion .vs__list,
-  .vue-suggestion .vs__loading {
-    position: absolute;
-  }
-  .vue-suggestion .vs__list .vs__list-item {
-    cursor: pointer;
-  }
-  .vue-suggestion .vs__list .vs__list-item.vs__item-active {
-    background-color: #f3f6fa;
-  }
-</style>
