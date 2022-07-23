@@ -17,7 +17,7 @@ Vue.component('app', require('./App.vue').default);
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
-
+import "./style.css"
 
 Vue.use(BootstrapVue);
 Vue.use(Vuelidate);

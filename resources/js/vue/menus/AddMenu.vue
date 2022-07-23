@@ -34,7 +34,11 @@
         </div>
     </div>
 
-    <button class="btn btn-success mt-4" style="margin:0 auto;">Сохранить меню</button>
+    <!-- <button class="btn btn-success mt-4" style="margin:0 auto;">Сохранить меню</button> -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" @click="closeModal">Отмена</button>
+        <button id="add" type="submit" class="btn btn-primary">Сохранить меню</button>
+    </div>
     </form>
   </div>
 </template>
@@ -102,6 +106,9 @@ export default{
                 this.$bvModal.hide('modal-1')
 
             }
+        },
+        closeModal(){
+            this.$bvModal.hide('modal-1')
         },
     },
     validations: {

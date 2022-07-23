@@ -3,7 +3,10 @@
         <FlashMessage :position="'right top'"></FlashMessage>
         <h1 class="text-center">Список меню</h1>
         <b-button v-b-modal.modal-1 variant="success" class="mb-4">Создать новое меню</b-button>
-        <b-modal id="modal-1" class="mb-4" size="lg" title="Добавление нового продукта">
+        <b-modal id="modal-1" class="mb-4" 
+            size="lg" 
+            title="Создание нового меню"
+            hide-footer="true">
             <addMenu/>
         </b-modal>
 
@@ -101,6 +104,7 @@ export default{
                     });
                 });
         },
+        
     },
     filters: {
         nutrition_separator: function (nutritions) {
