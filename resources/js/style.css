@@ -1,42 +1,307 @@
-.invalid{
-    color: brown;
+.invalid {
+	color: brown;
 }
 
-.modal-header > .close {
-			position: absolute;
-			top: 0.5rem;
-			right: 0.5rem;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 2.5rem;
-			height: 2.5rem;
-			border: none;
-			background-color: transparent;
-			font-size: 1.5rem;
-			transition: 0.25s linear;
-			
-			/*&:before, &:after {
-				position: absolute;
-				content: '';
-				width: 1.25rem;
-				height: 0.125rem;
-				background-color: black;
-			}
-			
-			&:before {
-				transform: rotate(-45deg);
-			}
-			
-			&:after {
-				transform: rotate(45deg);
-			}
-			
-			&:hover {
-				transform: rotate(360deg);
-				
-				&:before, &:after {
-					background-color: $accent;
-				}
-			}*/
-		}
+.modal-header>.close {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	border: none;
+	background-color: transparent;
+	font-size: 1.5rem;
+	transition: 0.25s linear;
+
+}
+
+/*TABLES STYLE START*/
+.fl-table {
+	border-radius: 5px;
+	font-size: 12px;
+	font-weight: normal;
+	border: none;
+	border-collapse: collapse;
+	width: 100%;
+	max-width: 100%;
+	white-space: nowrap;
+	background-color: white;
+}
+
+.fl-table td,
+.fl-table th {
+	text-align: center;
+	padding: 8px;
+}
+
+.fl-table td {
+	border-right: 1px solid #f8f8f8;
+	font-size: 12px;
+}
+
+.fl-table thead th {
+	color: #ffffff;
+	background: #4FC3A1;
+}
+
+
+.fl-table thead th:nth-child(odd) {
+	color: #ffffff;
+	background: #324960;
+}
+
+.fl-table tr:nth-child(even) {
+	background: #F8F8F8;
+}
+/* Если таблица двух уровневая, то применяя этот класс вся шапка будет темной без чередования */
+.fl-table__thead-dark th {
+	color: #ffffff!important;
+	background: #324960!important;
+}
+
+/* Responsive */
+
+@media (max-width: 767px) {
+	.fl-table {
+		display: block;
+		width: 100%;
+	}
+
+	.table-wrapper:before {
+		content: "Scroll horizontally >";
+		display: block;
+		text-align: right;
+		font-size: 11px;
+		color: white;
+		padding: 0 0 10px;
+	}
+
+	.fl-table thead,
+	.fl-table tbody,
+	.fl-table thead th {
+		display: block;
+	}
+
+	.fl-table thead th:last-child {
+		border-bottom: none;
+	}
+
+	.fl-table thead {
+		float: left;
+	}
+
+	.fl-table tbody {
+		width: auto;
+		position: relative;
+		overflow-x: auto;
+	}
+
+	.fl-table td,
+	.fl-table th {
+		padding: 20px .625em .625em .625em;
+		height: 60px;
+		vertical-align: middle;
+		box-sizing: border-box;
+		overflow-x: hidden;
+		overflow-y: auto;
+		width: 120px;
+		font-size: 13px;
+		text-overflow: ellipsis;
+	}
+
+	.fl-table thead th {
+		text-align: left;
+		border-bottom: 1px solid #f7f7f9;
+	}
+
+	.fl-table tbody tr {
+		display: table-cell;
+	}
+
+	.fl-table tbody tr:nth-child(odd) {
+		background: none;
+	}
+
+	.fl-table tr:nth-child(even) {
+		background: transparent;
+	}
+
+	.fl-table tr td:nth-child(odd) {
+		background: #F8F8F8;
+		border-right: 1px solid #E6E4E4;
+	}
+
+	.fl-table tr td:nth-child(even) {
+		border-right: 1px solid #E6E4E4;
+	}
+
+	.fl-table tbody td {
+		display: block;
+		text-align: center;
+	}
+}
+
+/*TABLES STYLE END*/
+/*BUTTON STYLE START*/
+.main-button-green {
+    color: #fff!important;
+    background-color: #4FC3A1 !important;
+    border-color: #4FC3A1!important;
+}
+.main-button-green:hover {
+    color: #0ea1a8!important;
+    background-color: #fff !important;
+    border-color: #4FC3A1!important;
+}
+
+.main-button-dark {
+    color: #fff!important;
+    background-color: #324960 !important;
+    border-color: #324960!important;
+}
+.main-button-dark:hover {
+    color: #324960!important;
+    background-color: #fff !important;
+    border-color: #324960!important;
+}
+/*BUTTON STYLE END*/
+
+/*NAVBAR START*/
+.navbar {
+	min-height: 70px;
+	z-index: 1000;
+  }
+  
+  .navbar-float {
+	/*position: absolute;
+	top: 20px;
+	left: 0;*/
+	width: 100%;
+	background-color: #fff;
+	box-shadow: 0 2px 6px rgba(100, 95, 136, 0.15);
+	z-index: 1070;
+  }
+  
+  /* .navbar.sticky {
+	z-index: 1080;
+  }
+  
+  .navbar.sticky.fixed ~ * {
+	margin-top: 70px;
+  }
+  
+  .navbar.sticky.fixed {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	animation: navTransition .5s ease;
+	box-shadow: 0 2px 6px rgba(100, 95, 136, 0.15);
+	z-index: 1080;
+  } */
+  
+  @keyframes navTransition {
+	from {
+	  top: -100%;
+	}
+	to {
+	  top: 0;
+	}
+  }
+  
+  .navbar-brand {
+	font-weight: 600;
+	padding-top: 10px;
+	padding-bottom: 10px;
+  }
+  
+  .navbar-nav {
+	margin-top: 10px;
+	border-top: 1px solid #e4e7ee;
+	flex-shrink: 0;
+  }
+  
+  .navbar-nav .nav-link {
+	transition: all .2s ease;
+  }
+  
+  .navbar-nav .btn {
+	font-size: 14px;
+  }
+  
+  .navbar-light .navbar-nav .nav-link {
+	color: rgba(100, 95, 136, 0.75);
+  }
+  
+  .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+	color: #645F88;
+  }
+  
+  .navbar-light .navbar-nav .show > .nav-link,
+  .navbar-light .navbar-nav .active > .nav-link,
+  .navbar-light .navbar-nav .nav-link.show,
+  .navbar-light .navbar-nav .nav-link.active {
+	font-weight: 500;
+	color: #6C55F9;
+  }
+  
+  
+  @media (min-width: 576px) {
+	.navbar-expand-sm .navbar-nav {
+	  margin-top: 0;
+	  border-top: none;
+	}
+	.navbar-expand-sm .navbar-nav .nav-link {
+	  padding-right: 16px;
+	  padding-left: 16px;
+	}
+	.navbar-expand-sm .navbar-nav {
+	  align-items: center;
+	}
+  }
+  
+  @media (min-width: 768px) {
+	.navbar-expand-md .navbar-nav {
+	  margin-top: 0;
+	  border-top: none;
+	}
+	.navbar-expand-md .navbar-nav .nav-link {
+	  padding-right: 16px;
+	  padding-left: 16px;
+	}
+	.navbar-expand-md .navbar-nav {
+	  align-items: center;
+	}
+  }
+  
+  @media (min-width: 992px) {
+	.navbar-expand-lg .navbar-nav {
+	  margin-top: 0;
+	  border-top: none;
+	}
+	.navbar-expand-lg .navbar-nav .nav-link {
+	  padding-right: 16px;
+	  padding-left: 16px;
+	}
+	.navbar-expand-lg .navbar-nav {
+	  align-items: center;
+	}
+  }
+  
+  @media (min-width: 1200px) {
+	.navbar-expand-xl .navbar-nav {
+	  margin-top: 0;
+	  border-top: none;
+	}
+	.navbar-expand-xl .navbar-nav .nav-link {
+	  padding-right: 16px;
+	  padding-left: 16px;
+	}
+	.navbar-expand-xl .navbar-nav {
+	  align-items: center;
+	}
+  }
+/*NAVBAR END*/

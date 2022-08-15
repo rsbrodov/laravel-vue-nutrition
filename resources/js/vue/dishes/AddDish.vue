@@ -104,12 +104,8 @@
             </div>
         </div>
         <div class="blocks mt-3 text-center">
-            <button class="btn btn-success"style="width: 100%">Сохранить блюдо</button>
+            <button class="btn main-button-green" style="width: 100%">Сохранить блюдо</button>
         </div>
-        <!-- <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" @click="closeModal">Отмена</button>
-            <button id="add" type="submit" class="btn btn-primary">Сохранить блюдо</button>
-        </div> -->
     </form>
 
   </div>

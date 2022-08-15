@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div style="width:50%; margin: 0 auto;">
-                <button style="width:100%" class="btn btn-success mt-4">Посмотреть</button>
+                <button style="width:100%" class="btn main-button-green mt-4">Посмотреть</button>
             </div>
         </form>
 
@@ -22,31 +22,31 @@
                 <p><b>{{day.day_name}}</b></p>
                 <div class="nutritions" v-for="(nutrition, index) in day.nutrition" :key="index">
                     <p><b>{{nutrition.nutrition_name}}</b></p>
-                    <table class="table table-bordered">
-                        <thead>
+                    <table class="fl-table">
+                        <thead class="fl-table__thead-dark">
                         <tr>
-                            <th scope="col" rowspan="2">№ рецептуры</th>
-                            <th scope="col" rowspan="2">Название блюда</th>
-                            <th scope="col" rowspan="2">Выход</th>
-                            <th scope="col" rowspan="2">Белки</th>
-                            <th scope="col" rowspan="2">Жиры</th>
-                            <th scope="col" rowspan="2">Углеводы</th>
-                            <th scope="col" rowspan="2">Эн. ценность</th>
-                            <th scope="col" colspan="5">Витамины</th>
-                            <th scope="col" colspan="6">Минеральные вещества</th>
+                            <th rowspan="2">№ рецептуры</th>
+                            <th rowspan="2">Название блюда</th>
+                            <th rowspan="2">Выход</th>
+                            <th rowspan="2">Белки</th>
+                            <th rowspan="2">Жиры</th>
+                            <th rowspan="2">Углеводы</th>
+                            <th rowspan="2">Эн. ценность</th>
+                            <th colspan="5">Витамины</th>
+                            <th colspan="6">Минеральные вещества</th>
                         </tr>
                         <tr>
-                            <th scope="col">B1, мг</th>
-                            <th scope="col">B2, мг</th>
-                            <th scope="col">A, мг</th>
-                            <th scope="col">D, мг</th>
-                            <th scope="col">C, мг</th>
-                            <th scope="col">Na, мг</th>
-                            <th scope="col">K, мг</th>
-                            <th scope="col">Mg, мг</th>
-                            <th scope="col">P, мг</th>
-                            <th scope="col">I, мг</th>
-                            <th scope="col">Se, мг</th>
+                            <th style="background:#324960!important">B1, мг</th>
+                            <th style="background:#324960!important">B2, мг</th>
+                            <th style="background:#324960!important">A, мг</th>
+                            <th style="background:#324960!important">D, мг</th>
+                            <th style="background:#324960!important">C, мг</th>
+                            <th style="background:#324960!important">Na, мг</th>
+                            <th style="background:#324960!important">K, мг</th>
+                            <th style="background:#324960!important">Mg, мг</th>
+                            <th style="background:#324960!important">P, мг</th>
+                            <th style="background:#324960!important">I, мг</th>
+                            <th style="background:#324960!important">Se, мг</th>
                         </tr>
                         </thead>
                         <tbody>

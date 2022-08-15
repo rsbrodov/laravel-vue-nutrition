@@ -193,7 +193,7 @@
         </div>
 
         <div class="blocks mt-3 text-center">
-            <button class="btn btn-success" style="width:100%">Сохранить продукт</button>
+            <button class="btn main-button-green" style="width:100%">Сохранить продукт</button>
         </div>
     </form>
   </div>
