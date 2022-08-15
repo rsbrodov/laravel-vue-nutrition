@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="blocks mt-3 text-center">
-                <button class="btn btn-success" style="width:100%">Посмотреть</button>
+                <button class="btn main-button-green" style="width:100%">Посмотреть</button>
             </div>
         </form>
 
@@ -39,7 +39,7 @@
         <div class="container mt-5 mb-2" v-if="post">
             <div class="container">
                 <p class="text-center" style="font-size: 20px;">Блюда в меню</p>
-                <table class="table table-bordered">
+                <table class="fl-table">
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -80,7 +80,7 @@
                         <input id="yield" class="form-control" type="text" v-model="form.yield" autocomplete="off">
                     </div>
                     <div class="col-4">
-                        <button class="btn btn-success mt-4 justify-content-center">Добавить в меню</button>
+                        <button class="btn main-button-green mt-4 justify-content-center">Добавить в меню</button>
                     </div>
                 </div>
             </form>

@@ -2,8 +2,8 @@
     <div style="width:90%; margin: 0 auto;">
         <FlashMessage :position="'right top'"></FlashMessage>
         <h1 class="text-center">Список меню</h1>
-        <b-button v-b-modal.modal-1 variant="success" class="mb-4">Создать новое меню</b-button>
-        <b-modal id="modal-1" class="mb-4" 
+        <b-button v-b-modal.modal-1 class="mb-4 main-button-green">Создать новое меню</b-button>
+        <b-modal id="modal-1" class="mb-4 " 
             size="lg" 
             title="Создание нового меню"
             hide-footer="true">
@@ -34,14 +34,15 @@
                 </div>
             </div>
         </div>
-        <table class="table table-bordered">
+        <table class="fl-table">
             <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Название</th>
-                <th scope="col" class="text-center">Приемы пищи</th>
-                <th scope="col" class="text-center">Дни</th>
-                <th scope="col" class="text-center">Дата создания</th>
+                <th scope="col">Приемы пищи</th>
+                <th scope="col">Дни</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Управление</th>
             </tr>
             </thead>
             <tbody>
@@ -141,37 +142,3 @@ export default{
 }
 
 </script>
-<style scope>
-  .vue-suggestion .vs__list {
-    width: 100%;
-    text-align: left;
-    border: none;
-    border-top: none;
-    max-height: 400px;
-    overflow-y: auto;
-    border-bottom: 1px solid #023d7b;
-    position: relative;
-  }
-  .vue-suggestion .vs__list .vs__list-item {
-    background-color: #fff;
-    padding: 10px;
-    border-left: 1px solid #023d7b;
-    border-right: 1px solid #023d7b;
-  }
-  .vue-suggestion .vs__list .vs__list-item:last-child {
-    border-bottom: none;
-  }
-  .vue-suggestion .vs__list .vs__list-item:hover {
-    background-color: #eee !important;
-  }
-  .vue-suggestion .vs__list,
-  .vue-suggestion .vs__loading {
-    position: absolute;
-  }
-  .vue-suggestion .vs__list .vs__list-item {
-    cursor: pointer;
-  }
-  .vue-suggestion .vs__list .vs__list-item.vs__item-active {
-    background-color: #f3f6fa;
-  }
-</style>

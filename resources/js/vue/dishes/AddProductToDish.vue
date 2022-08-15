@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="row" style="width: 100%">
-                    <button class="btn btn-success mt-3">Добавить продукт</button>
+                    <button class="btn main-button-green mt-3">Добавить продукт</button>
                 </div>
             </form>
         </div>
