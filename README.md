@@ -8,31 +8,31 @@
 <br>
 Ниже представлены скриншоты.
 ## Скрины
-![image](https://user-images.githubusercontent.com/55738777/168636398-e42abbd0-df8b-4c00-a887-9a8f455deb84.png)
+![image](https://user-images.githubusercontent.com/55738777/185775878-1034a870-6f54-4910-b51e-bb32a874cc43.png)
 <p align="center"><small>Скрин 1</small></p>
 На первом скриншоте представлен раздел с перечнем продуктов. Продукт можно удалить, если он не используется в блюде.
 
-![image](https://user-images.githubusercontent.com/55738777/168636735-a311771a-db7b-4f2d-88d0-7ab03e14ef5a.png)
+![image](https://user-images.githubusercontent.com/55738777/185775904-7d36d4c4-670e-4bd6-a88f-85a7cbabdeeb.png)
 <p class="text-center" style="margin: 0 auto;"><small>Скрин 2</small></p>
 Форма создания с валидацией (vuelidate).
 
-![image](https://user-images.githubusercontent.com/55738777/168645938-30ba07d8-cfde-4a64-b8a8-2220cb519dec.png)
+![image](https://user-images.githubusercontent.com/55738777/185775928-1e07e6ae-448c-45ad-8411-ddbcd24771e6.png)
 <p class="text-center" style="margin: 0 auto;"><small>Скрин 3</small></p>
 Раздел с перечнем блюд.
 
-![image](https://user-images.githubusercontent.com/55738777/168645749-bf17b485-e0e7-4460-8511-8f9677a4c261.png)
+![image](https://user-images.githubusercontent.com/55738777/185775957-3b670e1a-8bd2-45e8-a378-729990fa53b3.png)
 <p class="text-center" style="margin: 0 auto;"><small>Скрин 4</small></p>
 Добавления блюда.
 
-![image](https://user-images.githubusercontent.com/55738777/168646113-d76b7d14-fcd8-4ea3-8a9b-9bbc9d394642.png)
+![image](https://user-images.githubusercontent.com/55738777/185775975-c584c983-2695-4a62-af0a-d4e1907ba343.png)
 <p class="text-center" style="margin: 0 auto;"><small>Скрин 5</small></p>
 Список меню.
 
-![image](https://user-images.githubusercontent.com/55738777/168646504-f3856a73-bebf-4021-828e-16a4cc77d6cd.png)
+![image](https://user-images.githubusercontent.com/55738777/185775992-f1c1df81-5cee-455e-8169-862f767927ac.png)
 <p class="text-center" style="margin: 0 auto;"><small>Скрин 6</small></p>
 Работа с меню.
 
-![image](https://user-images.githubusercontent.com/55738777/168647363-dc8e988f-f1cb-4831-aa55-3784a79bc064.png)
+![image](https://user-images.githubusercontent.com/55738777/185776019-17c48776-6d75-4cbc-9076-4a15271dc8bd.png)
 
 <p class="text-center" style="margin: 0 auto;"><small>Скрин 7</small></p>
 Отчет по меню. По введенным данным формируется отчет.
@@ -44,6 +44,7 @@
 - PHP 7.4.
 - MySQL.
 - REST API.
+- Виртуализация Docker.
 
 ### Frontend
 
@@ -61,3 +62,8 @@
 - php artisan serve
 - npm run watch
 - Логин: adminlaravel@mail.ru, Пароль: ******
+
+Либо:
+- sudo docker-compose up -d
+- npm install
+- npm run watch
