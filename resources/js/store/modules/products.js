@@ -29,7 +29,7 @@ export default{
     actions: {
         async getProducts({commit}){
             commit('setLoading', true);
-            await axios.get('api/products/')
+            await axios.get('api/v1/products/')
             .then(response => {
                 commit('updateProducts', response.data)
             })
@@ -41,18 +41,18 @@ export default{
             });
         },
         async getNewProduct(ctx, form){
-            const new_dish = await axios.post('api/products/store', form);
+            const new_dish = await axios.post('api/v1/products/store', form);
             ctx.commit('addingProduct', new_dish.data)
-            const products = await axios.get('api/products/')
+            const products = await axios.get('api/v1/products/')
             ctx.commit('updateProducts', products.data)
         },
         async deleteProduct(ctx, id){
-            await axios.delete('api/products/'+id)
-            const products = await axios.get('api/products/')
+            await axios.delete('api/v1/products/'+id)
+            const products = await axios.get('api/v1/products/')
             ctx.commit('updateProducts', products.data)
         },
         async getProductsCategory(ctx){
-            const products_category = await axios.get('api/products/products-category')
+            const products_category = await axios.get('api/v1/products/products-category')
             ctx.commit('updateProductsCategory', products_category.data)
         },
     },

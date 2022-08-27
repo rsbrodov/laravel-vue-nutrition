@@ -123,7 +123,7 @@ export default{
 
         },
         setFirstMenu(){
-            axios.get('api/menus-dishes/nutritions/' + this.form.menu_id)
+            axios.get('api/v1/menus-dishes/nutritions/' + this.form.menu_id)
                 .then(response => {
                     this.nutritions = response.data;
                     console.log('nutrition'+this.form.menu_id);
@@ -133,7 +133,7 @@ export default{
                 });
 
 
-            axios.get('api/menus-dishes/days/' + this.form.menu_id)
+            axios.get('api/v1/menus-dishes/days/' + this.form.menu_id)
                 .then(response => {
                     console.log('day'+this.form.menu_id);
                     this.days = response.data;

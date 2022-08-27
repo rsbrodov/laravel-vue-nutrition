@@ -21,11 +21,11 @@ export default{
     },
     actions: {
         async getMyRoles(ctx){
-            const roles = await axios.get('api/register/roles')
+            const roles = await axios.get('api/v1/register/roles')
             ctx.commit('updateMyRoles', roles.data)
         },
         async getMyHeaderLinks(ctx){
-            const header_links = await axios.get('api/register/headerlinks')
+            const header_links = await axios.get('api/v1/register/headerlinks')
             ctx.commit('updateMyHeader_links', header_links.data)
         }
     },

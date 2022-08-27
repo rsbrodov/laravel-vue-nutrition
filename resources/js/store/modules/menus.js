@@ -42,36 +42,36 @@ export default{
     },
     actions: {
         async getMenus({commit}){
-            const menus = await axios.get('api/menus/');
+            const menus = await axios.get('api/v1/menus/');
             commit('updateMenus', menus.data)
         },
         async getFirstMenu({commit}){
-            const first_menu = await axios.get('api/menus/first-menu/');
+            const first_menu = await axios.get('api/v1/menus/first-menu/');
             commit('firstMenu', first_menu.data)
         },
         async getNewMenu(ctx, form){
-            const new_menu = await axios.post('api/menus/store', form);
+            const new_menu = await axios.post('api/v1/menus/store', form);
             ctx.commit('addingMenu', new_menu.data);
-            const menus = await axios.get('api/menus/');
+            const menus = await axios.get('api/v1/menus/');
             ctx.commit('updateMenus', menus.data)
         },
         async deleteMenu(ctx, id){
-            await axios.delete('api/menus/'+id);
-            const menus = await axios.get('api/menus/');
+            await axios.delete('api/v1/menus/'+id);
+            const menus = await axios.get('api/v1/menus/');
             ctx.commit('updateMenus', menus.data)
         },
         async getMenusDishes(ctx, form){
-            const menus_dishes = await axios.post('api/menus-dishes/index/', form);
+            const menus_dishes = await axios.post('api/v1/menus-dishes/index/', form);
             ctx.commit('updateMenusDishes', menus_dishes.data)
         },
         async getNewMenuDishes(ctx, form){
-            await axios.post('api/menus-dishes/store', form);
+            await axios.post('api/v1/menus-dishes/store', form);
 
-            const menus_dishes = await axios.post('api/menus-dishes/index/', form);
+            const menus_dishes = await axios.post('api/v1/menus-dishes/index/', form);
             ctx.commit('updateMenusDishes', menus_dishes.data)
         },
         async deleteMenuDishes(ctx, id){
-            await axios.delete('api/menus-dishes/'+id);
+            await axios.delete('api/v1/menus-dishes/'+id);
             ctx.commit('updateMenusDishes', menus_dishes.data)
         },
     },
