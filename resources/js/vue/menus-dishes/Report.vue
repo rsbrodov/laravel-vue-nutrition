@@ -101,7 +101,7 @@
             getReport() {
                 console.log(123);
                 this.getLoading = true;
-                axios.post('api/menus-dishes/report', this.form)
+                axios.post('api/v1/menus-dishes/report', this.form)
                     .then(response => {
                         this.post = response.data;
                     })

@@ -150,7 +150,7 @@ export default{
             }
         },
         async getCuli(){
-            this.culinar = await axios.get('api/dishes/culinary-processings')
+            this.culinar = await axios.get('api/v1/dishes/culinary-processings')
         }
     },
     validations: {
