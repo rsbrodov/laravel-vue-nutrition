@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Api\V1;
+
+use App\Http\Resources\ProductsResource;
 use App\Models\Products;
 use App\Models\Dishes;
 use App\Models\ProductsCategory;
@@ -18,7 +20,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Products::with('products_categories')->get();
+        $products = ProductsResource::collection(Products::with('products_categories')->get());
         return $products;
     }
 
