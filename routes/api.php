@@ -57,8 +57,8 @@ Route::prefix('v1/dishes-products')->group(function(){
 
 /*PRODUCTS GROUP*/
 Route::prefix('v1/products')->group(function(){
-    Route::get('/', [ProductsController::class, 'index'])->middleware('auth:sanctum');
-    Route::post('/store', [ProductsController::class, 'store']);
+    Route::get('/', [ProductsController::class, 'index']);
+    Route::post('/store', [ProductsController::class, 'store'])->middleware('auth:sanctum');
     Route::get('/products-category', [ProductsController::class, 'productsCategory']);
     Route::delete('/{id}', [ProductsController::class, 'destroy']);
 });
