@@ -12,12 +12,6 @@ class ProductsResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    //public static $wrap = 'user';
-    /*public function boot()
-    {
-        ProductsResource::withoutWrapping();
-    }*/
-
     public function toArray($request)
     {
         //return parent::toArray($request);

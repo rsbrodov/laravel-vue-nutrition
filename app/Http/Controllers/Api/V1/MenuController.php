@@ -16,23 +16,13 @@ class MenuController extends Controller
      */
     public function index()
     {
-        /*$menus = Menu::
-        select(['menus.name as name', 'menu_nutrition.nutrition_id as nutrition_id'])->
-        join('menu_nutrition', 'menu_nutrition.menu_id', '=', 'menus.id')->
-        get();*/
-
         $menus = Menu::with('nutritions', 'days')->get();
         return $menus;
     }
 
     public function firstMenu()
     {
-        /*$menus = Menu::
-        select(['menus.name as name', 'menu_nutrition.nutrition_id as nutrition_id'])->
-        join('menu_nutrition', 'menu_nutrition.menu_id', '=', 'menus.id')->
-        get();*/
         $menus = Menu::first();
-        //$menus = Menu::join('menu_nutrition', 'menu_nutrition.menu_id', '=', 'menus.id')->get();
         return $menus;
     }
     /**
@@ -57,47 +47,21 @@ class MenuController extends Controller
         $new_menu->name = $request->form['name'];
         $new_menu->parent_id = 0;
         $new_menu->save();
+        $mas_days_info = ['days1' => 1, 'days2' => 2, 'days3' => 3, 'days4' => 4, 'days5' => 5, 'days6' => 6, 'days7' => 7];
+        $mas_nutritions_info = ['nutrition1' => 1, 'nutrition2' => 2, 'nutrition3' => 3, 'nutrition4' => 4, 'nutrition5' => 5, 'nutrition6' => 6];
 
-        if($request->form['days1'] == true){
-            $mas_days[] = 1;
-        }
-        if($request->form['days2'] == true){
-            $mas_days[] = 2;
-        }
-        if($request->form['days3'] == true){
-            $mas_days[] = 3;
-        }
-        if($request->form['days4'] == true){
-            $mas_days[] = 4;
-        }
-        if($request->form['days5'] == true){
-            $mas_days[] = 5;
-        }
-        if($request->form['days6'] == true){
-            $mas_days[] = 6;
-        }
-        if($request->form['days7'] == true){
-            $mas_days[] = 7;
+        //$new_menu->days->attach(1);
+        //return $new_menu;
+        foreach($mas_days_info as $key => $mdi){
+            if($request->form[$key] == true){
+                $mas_days[] = $mdi;
+            }
         }
 
-        //nutrition
-        if($request->form['nutrition1'] == true){
-            $mas_nutritions[] = 1;//ЦИФРА НАПРОТИВ МАССИВА ОБОЗНАЧАЕТ ID ПРИЕМА ПИЩИ В ТАБЛИЦЕ NUTRITION_INFO!!!
-        }
-        if($request->form['nutrition2'] == true){
-            $mas_nutritions[] = 2;
-        }
-        if($request->form['nutrition3'] == true){
-            $mas_nutritions[] = 3;
-        }
-        if($request->form['nutrition4'] == true){
-            $mas_nutritions[] = 4;
-        }
-        if($request->form['nutrition5'] == true){
-            $mas_nutritions[] = 5;
-        }
-        if($request->form['nutrition6'] == true){
-            $mas_nutritions[] = 6;
+        foreach($mas_nutritions_info as $key => $mni){
+            if($request->form[$key] == true){
+                $mas_nutritions[] = $mni;
+            }
         }
 
         foreach($mas_days as $day){
@@ -114,7 +78,7 @@ class MenuController extends Controller
             $model4->nutrition_id = $nutrition;
             $model4->save();
         }
-        return Menu::where('id', $new_menu->id)->get();
+        return Menu::find($new_menu->id);
     }
 
     /**
