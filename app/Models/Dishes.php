@@ -19,7 +19,7 @@ class Dishes extends Model
         return $this->belongsTo(RecipesCollection::class);
     }
 
-    /*public function dishes_products(){
-        return $this->hasMany(Products::class)
-    }*/
+    public function products(){
+        return $this->belongsToMany(Products::class, 'dishes_products', 'dishes_id', 'products_id');
+    }
 }

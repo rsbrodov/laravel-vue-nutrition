@@ -6,10 +6,12 @@ use App\Http\Resources\ProductsResource;
 use App\Models\Products;
 use App\Models\Dishes;
 use App\Models\ProductsCategory;
+//use Facade\FlareClient\Http\Response;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProductsController extends Controller
 {
@@ -67,7 +69,8 @@ class ProductsController extends Controller
         $new_products->vitamin_c = $request->form['vitamin_c'];
         $new_products->vitamin_d = $request->form['vitamin_d'];
         $new_products->save();
-        return Products::find($new_products->id)->with('products_categories')->get();
+
+        return new ProductsResource($new_products);
     }
 
     /**
@@ -112,12 +115,9 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $existing_item = Products::find($id);
-        if($existing_item){
-            $existing_item->delete();
-            return 'Item saccessufuly delete';
-        }
-        return 'Item not found';
+        $existing_item = Products::findOrFail($id);
+        $existing_item->delete();
+        return response(null, Response::HTTP_NO_CONTENT);
     }
     public function roles()
     {
