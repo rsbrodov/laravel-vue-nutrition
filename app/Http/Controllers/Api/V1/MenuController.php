@@ -2,83 +2,44 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Requests\MenuRequest;
+use App\Http\Resources\MenuResource;
 use App\Models\Menu;
 use App\Models\MenuDays;
 use App\Models\MenuNutrition;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Services\MenuService;
+
 
 class MenuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    public $service;
+
+    public function __construct(MenuService $service)
+    {
+        $this->service = $service;
+    }
+
+
     public function index()
     {
-        $menus = Menu::with('nutritions', 'days')->get();
+        $menus = MenuResource::collection(Menu::with('nutritions', 'days')->get());
         return $menus;
     }
 
     public function firstMenu()
     {
-        $menus = Menu::first();
+        $menus = MenuResource::collection(Menu::first());
         return $menus;
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    
+    public function store(MenuRequest $request)
     {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $new_menu = New Menu();
-        $new_menu->name = $request->form['name'];
-        $new_menu->parent_id = 0;
-        $new_menu->save();
-        $mas_days_info = ['days1' => 1, 'days2' => 2, 'days3' => 3, 'days4' => 4, 'days5' => 5, 'days6' => 6, 'days7' => 7];
-        $mas_nutritions_info = ['nutrition1' => 1, 'nutrition2' => 2, 'nutrition3' => 3, 'nutrition4' => 4, 'nutrition5' => 5, 'nutrition6' => 6];
-
-        //$new_menu->days->attach(1);
-        //return $new_menu;
-        foreach($mas_days_info as $key => $mdi){
-            if($request->form[$key] == true){
-                $mas_days[] = $mdi;
-            }
-        }
-
-        foreach($mas_nutritions_info as $key => $mni){
-            if($request->form[$key] == true){
-                $mas_nutritions[] = $mni;
-            }
-        }
-
-        foreach($mas_days as $day){
-            $model3 = new MenuDays();
-            $model3->menu_id = $new_menu->id;
-            $model3->days_id = $day;
-            $model3->save();
-        }
-
-        foreach ($mas_nutritions as $nutrition)
-        {
-            $model4 = new MenuNutrition();
-            $model4->menu_id = $new_menu->id;
-            $model4->nutrition_id = $nutrition;
-            $model4->save();
-        }
-        return Menu::find($new_menu->id);
+        $new_menu = $this->service->store($request->validated());
+        
+        return new MenuResource($new_menu);
     }
 
     /**
@@ -124,11 +85,9 @@ class MenuController extends Controller
     public function destroy($id)
     {
         $existing_item = Menu::find($id);
-        if($existing_item){
-            $existing_item->delete();
-            return 'Item saccessufuly delete';
-        }
-        return 'Item not found';
+        $existing_item->delete();
+        return response(null, Response::HTTP_NO_CONTENT);
+            
     }
 
     public function menuCharacters($id)

@@ -13,7 +13,7 @@
             <div class="block">
                 <label for="recipes_collection_id"><b>Категория продукта</b></label>
                 <select id="recipes_collection_id" class="form-control"
-                        v-model="form.category_id">
+                        v-model="form.products_categories_id">
                     <option v-for="(category, index) in productsCategory"
                             :key="index"
                             :value="category.id"
@@ -21,7 +21,7 @@
                         {{category.name}}
                     </option>
                 </select>
-                <small class="helper-text invalid" v-if="$v.form.category_id.$dirty && !$v.form.category_id.required">
+                <small class="helper-text invalid" v-if="$v.form.products_categories_id.$dirty && !$v.form.products_categories_id.required">
                     Поле не может быть пустым!
                 </small>
             </div>
@@ -208,7 +208,7 @@ export default{
             products_category:'',
             form:{
                 name:'',
-                category_id:'',
+                products_categories_id:'',
                 water:'',
                 protein:'',
                 fat:'',
@@ -255,7 +255,7 @@ export default{
     validations: {
         form:{
             name: {required},
-            category_id: {required},
+            products_categories_id: {required},
             water: {required, decimal},
             protein: {required, decimal},
             fat: {required, decimal},

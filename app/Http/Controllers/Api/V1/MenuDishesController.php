@@ -9,48 +9,31 @@ use App\Models\MenuNutrition;
 use App\Models\Nutrition;
 use App\Services\MenusDishesService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class MenuDishesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public $service;
+
+    public function __construct(MenusDishesService $service)
+    {
+        $this->service = $service;
+    }
+    
+
     public function index(Request $request)
     {
-        $menus_dishes = MenuDishes::with('dishes')->where(['menu_id' => $request->form['menu_id'], 'nutrition_id' => $request->form['nutrition_id'], 'days_id' => $request->form['day_id']])->get();
+        $menus_dishes = MenuDishes::with('dishes')->where(['menu_id' => $request->form['menu_id'], 'nutrition_id' => $request->form['nutrition_id'], 'days_id' => $request->form['days_id']])->get();
         return $menus_dishes;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        $new_menu = New MenuDishes();
-        $new_menu->dishes_id =$request->form['dishes_id'];
-        $new_menu->menu_id = $request->form['menu_id'];
-        $new_menu->days_id = $request->form['day_id'];
-        $new_menu->nutrition_id = $request->form['nutrition_id'];
-        $new_menu->yield = $request->form['yield'];
-        $new_menu->cycle = 1;
-        $new_menu->save();
+        $data = $request->form;
+        $data['cycle'] = 1;
+        $new_menu = MenuDishes::create($data);
         return MenuDishes::where('id', $new_menu->id)->get();
-        //return $request;
     }
 
     /**
@@ -96,11 +79,8 @@ class MenuDishesController extends Controller
     public function destroy($id)
     {
         $existing_item = MenuDishes::find($id);
-        if($existing_item){
-            $existing_item->delete();
-            return 'Item saccessufuly delete';
-        }
-        return 'Item not found';
+        $existing_item->delete();
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 
     public function getNutritions($id)
@@ -125,11 +105,7 @@ class MenuDishesController extends Controller
 
     public function getReport(Request $request)
     {
-        //return $request['menu_id'];
-        $services = new MenusDishesService();
-        //$result = $services->CalculateMenuInfo($request['menu_id']);
-        $result = $services->CalculateMenuInfo($request['menu_id']);
-
+        $result = $this->service->CalculateMenuInfo($request['menu_id']);
         return $result;
     }
 }

@@ -9,6 +9,8 @@ class Dishes extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function dishes_categories()
     {
         return $this->belongsTo(DishesCategory::class);
