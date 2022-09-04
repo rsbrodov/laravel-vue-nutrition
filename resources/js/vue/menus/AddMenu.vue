@@ -96,7 +96,20 @@ export default{
                 console.log('Form submitted')
             }else{
                 this.getNewMenu({
-                    form: this.form
+                    name: this.form.name,
+                    days1: this.form.days1,
+                    days2: this.form.days2,
+                    days3: this.form.days3,
+                    days4: this.form.days4,
+                    days5: this.form.days5,
+                    days6: this.form.days6,
+                    days7: this.form.days7,
+                    nutrition1: this.form.nutrition1,
+                    nutrition2: this.form.nutrition2,
+                    nutrition3: this.form.nutrition3,
+                    nutrition4: this.form.nutrition4,
+                    nutrition5: this.form.nutrition5,
+                    nutrition6: this.form.nutrition6,
                 }).then(response => {
                     this.flashMessage.success({
                         message: 'Меню успешно создано',

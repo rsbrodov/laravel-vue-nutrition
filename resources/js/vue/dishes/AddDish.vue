@@ -138,7 +138,10 @@ export default{
                 console.log('Form submitted')
             }else {
                 this.newDish({
-                    form: this.form
+                    name: this.form.name, dishes_categories_id: this.form.dishes_categories_id, recipes_collections_id: this.form.recipes_collections_id,
+                    description: this.form.description, culinary_processings_id: this.form.culinary_processings_id, yield: this.form.yield,
+                    dishes_characters: this.form.dishes_characters, techmap_number: this.form.techmap_number
+                    
                 })
                     .then(response => {
                         this.flashMessage.success({

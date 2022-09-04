@@ -74,7 +74,7 @@ export default{
             });
         },
         async getMyRecipesCollections(ctx){
-            const my_recipes_collections = await axios.get('api/v1/dishes/recipes-collections');
+            const my_recipes_collections = await axios.get('api/v1/recipes-collections');
             ctx.commit('updateMyRecipesCollections', my_recipes_collections.data)
         },
         async getCulinaryProcessings(ctx){

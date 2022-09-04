@@ -9,8 +9,9 @@ class Menu extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function nutritions(){
-        //return $this->hasMany(MenuNutrition::class);
         //return $this->hasManyThrough(Nutrition::class, MenuNutrition::class);
         return $this->belongsToMany(Nutrition::class, 'menu_nutrition', 'menu_id', 'nutrition_id');
     }

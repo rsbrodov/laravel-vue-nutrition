@@ -14,8 +14,8 @@
                     </select>
                 </div>
                 <div class="col-4">
-                    <label for="day_id"><b>Дни</b></label>
-                    <select id="day_id" class="form-control" v-model="form.day_id">
+                    <label for="days_id"><b>Дни</b></label>
+                    <select id="days_id" class="form-control" v-model="form.days_id">
                         <option v-for="(day, index) in days" :key="index" :value="index">
                             {{day}}
                         </option>
@@ -101,7 +101,7 @@ export default{
             days:null,
             form:{
                 menu_id: null,
-                day_id:'',
+                days_id:'',
                 nutrition_id:'',
                 dishes_id:null,
                 yield:null,
@@ -113,7 +113,7 @@ export default{
         ...mapActions(['getMyDishes', 'getMenus', 'getNewMenuDishes', 'getMenusDishes', 'deleteMenuDishes']),
         menusDishesIndex(){
             this.getMyDishes();
-            this.post = this.form.day_id;
+            this.post = this.form.days_id;
             this.getMenusDishes({
                 form: this.form
             })

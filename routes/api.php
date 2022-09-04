@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\V1\DishesProductsController;
 use App\Http\Controllers\Api\V1\MenuController;
 use App\Http\Controllers\Api\V1\MenuDishesController;
 use App\Http\Controllers\Api\V1\ProductsController;
-use App\Http\Controllers\CulinaryProcessings;
+use App\Http\Controllers\Api\V1\RecipesCollectionsController;
 use App\Http\Controllers\Api\V1\RegisterController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
@@ -42,7 +42,6 @@ Route::prefix('/v1/dishes')->group(function(){
     Route::post('/store', [DishesController::class, 'store']);
     Route::delete('/{id}', [DishesController::class, 'destroy']);
     Route::get('/dishes-categories', [DishesController::class, 'dishesCategories']);
-    Route::get('/recipes-collections', [DishesController::class, 'recipesCollections']);
     Route::get('/culinary-processings', [DishesController::class, 'culinaryProcessings']);
     Route::post('/copy-dish/{id}', [DishesController::class, 'copyDish']);
     Route::post('/one-dish/{id}', [DishesController::class, 'oneDish']);
@@ -86,6 +85,11 @@ Route::prefix('v1/menus-dishes')->group(function(){
 Route::prefix('v1/register')->group(function(){
     Route::get('/roles', [RegisterController::class, 'roles']);
     Route::get('/headerlinks', [RegisterController::class, 'headerlinks']);
+});
+
+/*RECIPES GROUP*/
+Route::prefix('/v1')->group(function(){
+    Route::get('/recipes-collections', [RecipesCollectionsController::class, '__invoke']);
 });
 
 Route::get('/items', [ItemController::class, 'index']);
